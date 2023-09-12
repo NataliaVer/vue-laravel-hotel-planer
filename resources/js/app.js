@@ -6,8 +6,9 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from "vue-router";
+// import { createRouter, createWebHistory } from "vue-router";
 import store from './store';
+import router from './router';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -19,27 +20,6 @@ import { i18nVue } from 'laravel-vue-i18n'
  * registering components with the application instance so they are ready
  * to use in your application'./components/home/ExampleComponent.vueor you.
  */
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        {
-            path: '/hotel/:id/:dateFrom/:dateTo', name: 'hotel.show', component: () => import('./components/hotel/ShowHotelComponent.vue')
-        },
-        {
-            path: '/', name: 'home', component: () => import('./components/home/HomeComponent.vue')
-        },
-        {
-            path: '/booking_room/:hotel_id/:id/:dateFrom/:dateTo', name: 'room.book', component: () => import('./components/hotel/BookingRoomComponent.vue')
-        },
-        {
-            path: '/signin', name: 'signin', component: () => import('./components/auth/SigninComponent.vue')
-        },
-        {
-            path: '/signup', name: 'signup', component: () => import('./components/auth/SignUpComponent.vue')
-        },
-    ]
-})
 
 const app = createApp({});
 

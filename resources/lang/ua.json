@@ -31,5 +31,19 @@
     "AddReservation": "Бронювання додано",
     "AddReservationText": "Очікуйте дзвінка від адміністратора для підтвердження",
     "SignIn": "Вхід",
-    "Pass": "Пароль"
+    "Pass": "Пароль",
+    "PassConfirm": "Підтвердження пароля",
+    "Registr": "Зареєструватися",
+    "YourOffice": "Мій кабінет",
+    "FogotPassword": "Забули пароль",
+    "ResetPassword": "Скинути пароль",
+    "DidYouRememberPass": "Згадали пароль?",
+    "SignInHere": "Увійти тут",
+    "DontHaveAccount": "Не маєте акаунту?",
+    "SignUpHere": "Зареєструватися тут",
+    "ForgotYourPassword": "Забули пароль?",
+    "SentTheLetter": "Лист було відправлено!",
+    "CheckYourEmail": "Перевірте свою електронну пошту",
+    "YourPasswordHasBeenReset": "Ваш пароль оновлено",
+    "DontGetTheLetter": "Не отримали листа? Перевірте спам або напишіть нам"
 }

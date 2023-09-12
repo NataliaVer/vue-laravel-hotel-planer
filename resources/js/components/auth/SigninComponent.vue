@@ -2,7 +2,6 @@
     <div class="container text-center col-sm-4">
     
     <main class="form-signin">
-      <form method="POST">
         <h1 class="h3 mb-3 fw-normal mt-3">{{ $t('SignIn') }}</h1>
     
         <div class="form-floating mb-3">
@@ -15,24 +14,20 @@
         </div>
     
         <div class="checkbox mb-3">
-          <!-- <label>
-            <input type="checkbox" value="remember-me"> Запам'ятати мене
-          </label> -->
         </div>
         <button @click.prevent="SignIn()" class="w-100 btn btn-lg btn-primary" type="submit">{{ $t('SignIn') }}</button>
-        <p class="mt-5 mb-3 text-muted"></p>
-      </form>
+        <p class="mt-5 mb-3 text-muted">{{ $t('DontHaveAccount') }} <router-link to="/signup">{{ $t('SignUpHere') }}</router-link></p>
+        <p class="mt-5 mb-3 text-muted"><router-link to="/forgotpass">{{ $t('ForgotYourPassword') }}</router-link></p>
+        
     </main>
     
-    <!-- <template>
+    <template v-if="errors">
         <div class="alert alert-danger">
             <ul>
-                <template>
-                    <li>{{ $error }}</li>
-                </template>
+                <li>{{ errors }}</li>
             </ul>
         </div>
-    </template> -->
+    </template>
     
     </div>
 </template>
@@ -46,19 +41,39 @@ export default {
       email: null,
       password: null,
       errors: null,
+      isGuest: null,
     }
   },
 
+  mounted() {
+      // this.$store.dispatch('getUser');
+    },
+
   methods: {
     SignIn() {
-      axios.post('/api/signin/login', {email: this.email, password: this.password})
+      this.errors = null;
+      axios.post('/login', {
+        email: this.email,
+        password: this.password
+      })
       .then(res => {
-        console.log(res.data);
+        this.$router.push('/');
+        this.$store.dispatch('getIsGuest');
       })
       .catch(error => {
         console.log(error);
-      })
+        this.errors = error.response.data.message;
+      });
     },
-  }
+  },
+
+  // computed: {
+  //     user() {
+  //           return this.$store.getters.user;
+  //       }
+  //   },
+
 }
 </script>
+
+<style></style>

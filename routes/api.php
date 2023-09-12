@@ -28,8 +28,15 @@ Route::get('/hotel/{hotel}/{dateFrom}/{dateTo}', [HotelController::class, 'show'
 
 Route::post('/bookingroom', [App\Http\Controllers\BookingRoomController::class, 'bookRoom']);
 
-Route::group(['middleware' => ['api']], function () {
-    Route::post('/signin/login', [App\Http\Controllers\Auth\LoginController::class,'login'])->name('signin.login');
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Route::post('/signin/login', [App\Http\Controllers\Auth\LoginController::class,'login'])->name('signin.login');
+    Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
+    // Route::get('/getUser', [App\Http\Controllers\Auth\LoginController::class, 'getUser']);
 });
+// Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
+Route::get('/isGuest', [App\Http\Controllers\Auth\UserController::class, 'isGuest']);
+Route::get('/getUser', [App\Http\Controllers\Auth\UserController::class, 'index']);
+Route::post('/forgot-password',[App\Http\Controllers\Auth\ForgotPasswordController::class, 'forgotPassword']);
+Route::post('/reset-password',[App\Http\Controllers\Auth\NewPasswordController::class, 'store']);
 
 

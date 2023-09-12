@@ -8,14 +8,18 @@
 
     <div class="col-md-auto">
 
-      <template v-if="!isGuest">
+      <!-- <template v-if="user">USER</template> -->
+      <template v-if="guest">
         <router-link to="/signup"><button class="btn btn-outline-primary me-2">{{ $t('SignUp') }}</button></router-link>
-        <router-link to="/signin"><button class="btn btn-primary">{{ $t('Login') }}</button></router-link>
+        <router-link to="/signin"><button class="btn btn-primary me-2">{{ $t('Login') }}</button></router-link>
+        <!-- <router-link v-if="token" to="/signin"><button class="btn btn-primary me-2">{{ $t('YourOffice') }}</button></router-link> -->
       </template>
       <template v-else>
-        <a class="btn btn-primary" href="#">{{ $t('Name') }}</a>
-        <a class="btn btn-primary" href="#">{{ $t('Logout') }}</a>
+        <a class="btn btn-primary me-2" href="#">{{ $t('YourOffice') }}</a>
+        <a class="btn btn-primary me-2" @click.prevent="Logout()" href="#">{{ $t('Logout') }}</a>
       </template>
+
+      <!-- <a class="btn btn-primary me-2" @click.prevent="isGuestNow()" href="#">{{ $t('isGuest') }}</a> -->
 
     </div>
 
@@ -34,9 +38,8 @@
 import { loadLanguageAsync } from 'laravel-vue-i18n';
 
 export default {
-  props: [
-    'isGuest'
-  ],
+
+  // props: ['user'],
 
   data() {
     return {
@@ -45,15 +48,41 @@ export default {
   },
 
   mounted() {
-    console.log();
-  },
+      this.$store.dispatch('getIsGuest');
+      // this.$store.dispatch('getLang',{lang: this.language});
+    },
 
   methods: {
     switchLanguageTo(language) {
       this.language = language;
       loadLanguageAsync(this.language);
-    }
-  }
+      // this.$store.dispatch('getLang',{lang: language});
+    },
+    Logout() {
+      axios.post('/logout')
+      .then(res => {
+        this.$router.push({name: 'signin'});
+        this.$store.dispatch('getIsGuest');
+      })
+    },
+
+    // isGuestNow() {
+    //   axios.get(`/api/getUser`)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    // },
+  },
+
+  computed: {
+      guest() {
+            return this.$store.getters.guest;
+        },
+        // lang() {
+        //     return this.$store.getters.lang;
+        // }
+    },
+    
 }
 </script>
 

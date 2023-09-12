@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,24 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * @param \App\Http\Requests\Auth\LoginRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(LoginRequest $request){
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials,true)) {
+            $request->session()->regenerate();
+            // return response()->noContent();
+        }
+        return back()->withErrors([
+            'email' => 'The email address or password is incorrect',
+        ])->onlyInput('email');
+    }
+
 }

@@ -31,5 +31,19 @@
     "AddReservation": "Reservation has added",
     "AddReservationText": "Wait for a call from the administrator to confirm",
     "SignIn": "Sign in",
-    "Pass": "Password"
+    "Pass": "Password",
+    "PassConfirm": "Password confirmation",
+    "Registr": "Registration",
+    "YourOffice": "Your office",
+    "FogotPassword": "Fogot password",
+    "ResetPassword": "Reset password",
+    "DidYouRememberPass": "Did you remember your password?",
+    "SignInHere": "Sign in here",
+    "DontHaveAccount": "Don't have an account?",
+    "SignUpHere": "Sign up here",
+    "ForgotYourPassword": "Forgot your password?",
+    "SentTheLetter": "The letter has been sent!",
+    "CheckYourEmail": "Check your email",
+    "YourPasswordHasBeenReset": "Your password has been reset",
+    "DontGetTheLetter": "Don't get the letter? Check your spam or write to us"
 }

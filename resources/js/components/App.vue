@@ -4,8 +4,8 @@
 
 <script>
 export default {
+
     mounted() {
-        // console.log('App component.')
     },
 
     methods: {
@@ -16,6 +16,23 @@ export default {
                 'success'
             );
         },
+
+        OnYourEmailSendTheLetter() {
+            this.$swal(
+                this.$t('SentTheLetter'),
+                this.$t('CheckYourEmail'),
+                'success'
+            );
+        },
+
+        YourPasswordHasBeenReset() {
+            this.$swal(
+                this.$t('OK'),
+                this.$t('YourPasswordHasBeenReset'),
+                'success'
+            );
+        },
+ 
     },
 }
 </script>

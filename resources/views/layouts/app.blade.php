@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Hotel Planer') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -19,7 +19,8 @@
 <body>
     <div id="app">
 
-      <header-component :isGuest="{{ json_encode(auth()->guest())}}"></header-component>
+      <header-component></header-component>
+      {{-- :is-guest="{{ json_encode(auth()->guest())}}" --}}
 
         <app-component></app-component>
 
