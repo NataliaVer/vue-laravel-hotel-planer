@@ -38,5 +38,23 @@ Route::get('/isGuest', [App\Http\Controllers\Auth\UserController::class, 'isGues
 Route::get('/getUser', [App\Http\Controllers\Auth\UserController::class, 'index']);
 Route::post('/forgot-password',[App\Http\Controllers\Auth\ForgotPasswordController::class, 'forgotPassword']);
 Route::post('/reset-password',[App\Http\Controllers\Auth\NewPasswordController::class, 'store']);
+Route::put('/updateUser',[App\Http\Controllers\Auth\ChangeUserDataController::class, 'index']);
+
+Route::get('/getHotel',[App\Http\Controllers\Hotels\GetHotelController::class, 'index']);
+Route::post('/hotel/create',[App\Http\Controllers\Hotels\StoreHotelController::class, 'index']);
+Route::delete('/hotel/{hotel}',[App\Http\Controllers\Hotels\DestroyHotelController::class, 'index']);
+Route::post('/hotelUpdate/{hotel}',[App\Http\Controllers\Hotels\UpdateHotelController::class, 'index']);
+
+Route::get('/getRooms',[App\Http\Controllers\Rooms\GetRoomsController::class, 'index']);
+Route::post('/roomUpdate/{room}',[App\Http\Controllers\Rooms\UpdateRoomController::class, 'index']);
+Route::post('/room/create',[App\Http\Controllers\Rooms\StoreRoomController::class, 'index']);
+Route::delete('/room/{room}',[App\Http\Controllers\Rooms\DestroyRoomController::class, 'index']);
+
+Route::get('/searchBookedRooms/{dateFrom}/{dateTo}', [App\Http\Controllers\BokingRooms\ListOfBookedRoomController::class, 'index']);
+Route::get('/confirmBooking/{id}/{action}', [App\Http\Controllers\BokingRooms\UpdateBookedRoomController::class, 'confirmOrCancelBooking']);
+Route::post('/bookingRoom/update/{bookedRoom}', [App\Http\Controllers\BokingRooms\UpdateBookedRoomController::class, 'index']);
+Route::delete('/bookingRoom/{bookingroom}', [App\Http\Controllers\BokingRooms\DestroyBookedRoomController::class, 'index']);
+Route::get('/listAvialableRooms/{id}/{dateFrom}/{dateTo}', [App\Http\Controllers\BokingRooms\UpdateBookedRoomController::class, 'allAvialableRoomsToDateByUser']);
+Route::post('/storeBookingRoom', [App\Http\Controllers\BokingRooms\StoreBookedRoomController::class, 'index']);
 
 

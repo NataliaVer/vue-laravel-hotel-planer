@@ -13,7 +13,14 @@ import router from './router';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-import { i18nVue } from 'laravel-vue-i18n'
+import { i18nVue } from 'laravel-vue-i18n';
+
+import '@fortawesome/fontawesome-free/js/all';
+
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+
+import VueCookies from 'vue-cookies';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -31,6 +38,8 @@ app.component('footer-component', FooterComponent);
 
 import HeaderComponent from './components/includes/HeaderComponent.vue';
 app.component('header-component', HeaderComponent);
+
+app.component('VueDatePicker', VueDatePicker);
 
 /**
  * The following block of code may be used to automatically register your
@@ -59,6 +68,8 @@ app.use(i18nVue, {
         return await langs[`../lang/${lang}.json`]();
     }
 });
+
+app.use(VueCookies);
 
 app.use(router).mount('#app');
 

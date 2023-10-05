@@ -4,14 +4,14 @@ namespace App\Http\Requests\Room;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TestRequest extends FormRequest
+class UpdateRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class TestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-        ];
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'amenities' => 'required',
+            'count_one_bed' => '',
+            'count_two_bed' => '',
+            'count_rooms' => 'required',
+            'room_photos' => ''
+            ];
     }
 }

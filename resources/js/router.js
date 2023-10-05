@@ -28,7 +28,22 @@ const router = createRouter({
             path: '/get', name: 'get', component: () => import('./components/auth/GetComponent.vue')
         },
         {
-            path: '/my_profile', name: 'my_profile', component: () => import('./components/Office/ProfileComponent.vue')
+            path: '/my_profile', name: 'my_profile', component: () => import('./components/Office/UserDataComponent.vue')
+        },
+        {
+            path: '/my_hotel', name: 'my_hotel', component: () => import('./components/Office/MyHotelComponent.vue')
+        },
+        {
+            path: '/my_rooms', name: 'my_rooms', component: () => import('./components/Office/MyRoomsComponent.vue')
+        },
+        {
+            path: '/add_room', name: 'add_room', component: () => import('./components/Office/Rooms/AddRoomComponent.vue')
+        },
+        {
+            path: '/reservations', name: 'reservations', component: () => import('./components/Office/ReservationsComponent.vue')
+        },
+        {
+            path: '/add_reservation', name: 'add_reservation', component: () => import('./components/Office/BookedRoom/AddBookedRoomComponent.vue')
         },
     ]
 })

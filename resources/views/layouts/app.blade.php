@@ -19,7 +19,7 @@
 <body>
     <div id="app">
 
-      <header-component></header-component>
+      {{-- <header-component></header-component> --}}
       {{-- :is-guest="{{ json_encode(auth()->guest())}}" --}}
 
         <app-component></app-component>
@@ -28,7 +28,7 @@
             @yield('content')
         </main>
 
-        <footer-component></footer-component>
+        {{-- <footer-component></footer-component> --}}
     </div>
 </body>
 </html>

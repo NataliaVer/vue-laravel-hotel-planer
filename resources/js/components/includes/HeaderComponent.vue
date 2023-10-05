@@ -15,7 +15,7 @@
         <!-- <router-link v-if="token" to="/signin"><button class="btn btn-primary me-2">{{ $t('YourOffice') }}</button></router-link> -->
       </template>
       <template v-else>
-        <a class="btn btn-primary me-2" href="#">{{ $t('YourOffice') }}</a>
+        <router-link to="/my_profile" class="btn btn-primary me-2">{{ $t('MyOffice') }}</router-link>
         <a class="btn btn-primary me-2" @click.prevent="Logout()" href="#">{{ $t('Logout') }}</a>
       </template>
 
