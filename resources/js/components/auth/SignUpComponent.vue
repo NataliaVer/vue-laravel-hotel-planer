@@ -31,9 +31,6 @@
         </div>
 
         <div class="checkbox mb-3">
-          <!-- <label>
-            <input type="checkbox" value="remember-me"> Запам'ятати мене
-          </label> -->
         </div>
         <button @click.prevent="Register()" class="w-100 btn btn-lg btn-primary" type="submit">{{ $t('Registr')
         }}</button>
@@ -41,15 +38,15 @@
       </form>
     </main>
 
-    <!-- <template>
+    <template v-if="errors">
         <div class="alert alert-danger">
             <ul>
-                <template>
-                    <li>{{ $error }}</li>
+                <template v-for="error in errors">
+                    <li>{{ $t(error[0]) }}</li>
                 </template>
             </ul>
         </div>
-    </template> -->
+    </template>
 
   </div>
 </template>
@@ -71,6 +68,7 @@ export default {
 
   methods: {
     Register() {
+      this.errors = null;
       // axios.get('/sanctum/csrf-cookie')
       //   .then(response => {
           axios.post('/register', {
@@ -81,12 +79,12 @@ export default {
             password_confirmation: this.password_confirmation
           })
             .then(res => {
-              console.log(res);
-              // this.$router.push('/my_profile');
+              // console.log(res);
+              this.$router.push('/');
             })
             .catch(error => { 
-              console.log(error);
-              this.errors = error.response.data.message;
+              console.log(error.response.data.errors);
+              this.errors = error.response.data.errors;
             });
         // });
     },

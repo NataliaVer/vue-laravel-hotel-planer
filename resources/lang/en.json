@@ -101,5 +101,7 @@
     "Confirmed": "Confirmed",
     "AddReservationButton": "Add reservation",
     "Cancel": "Cancel",
-    "UpdateBookedRoomComponentHeader": "Update reservation data"
+    "UpdateBookedRoomComponentHeader": "Update reservation data",
+    "YouNeedCreateRooms": "To create a reservation, first fill the rooms",
+    "MinPrice": "Price from"
 }

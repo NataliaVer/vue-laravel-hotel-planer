@@ -101,5 +101,18 @@
     "Confirmed": "Підтверджено",
     "AddReservationButton": "Створити бронювання",
     "Cancel": "Відмінити",
-    "UpdateBookedRoomComponentHeader": "Оновити дані бронювання"
+    "UpdateBookedRoomComponentHeader": "Оновити дані бронювання",
+    "YouNeedCreateRooms": "Щоб створювати резервування, спочатку заповніть кімнати",
+    "MinPrice": "Ціни від",
+    "No hotel was found for your request": "За вашим запитом не знайдено жодного готеля",
+    "Fill in the desired reservation dates": "Заповніть дати бажаного бронювання",
+    "Please, specify the city": "Укажіть місто",
+    "The name field is required.": "Поле імені є обов’язковим для заповнення.",
+    "The email field is required.": "Поле електронної адреси є обов’язковим для заповнення.",
+    "The password field is required.": "Поле пароля є обов’язковим для заповнення.",
+    "The email field must be a valid email address.": "Поле електронної пошти має бути дійсною електронною адресою.",
+    "The password field must be at least 8 characters.": "Поле пароля має містити не менше 8 символів.",
+    "The password field confirmation does not match.": "Поле підтвердження пароля не збігається.",
+    "The email has already been taken.": "Електронна пошта вже зайнята.",
+    "These credentials do not match our records.": "Облікові дані не збігаються"
 }

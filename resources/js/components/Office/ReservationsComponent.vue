@@ -6,14 +6,14 @@
     <div class="my-3">
         <VueDatePicker v-model="date" range multi-calendars :enable-time-picker="false" @update:model-value="changeDate" />
     </div>
-    <!-- <template v-if="rooms"> -->
+    <template v-if="hasRooms">
         <div class="text-center">
         <router-link to="add_reservation"><button type="button" class="btn btn-primary mb-3">Add Reservation</button></router-link>
     </div>
-    <!-- </template>
+    </template>
     <template v-else>
-        <p class="text-danger text-center">Щоб створювати резервування, спочатку заповніть кімнати</p>
-    </template> -->
+        <p class="text-danger text-center">{{ $t('YouNeedCreateRooms') }}</p>
+    </template>
     <template v-if="bookings">
         <template v-for="booking in bookings">
             <div class="card mb-3">
@@ -36,7 +36,8 @@
                         <button class="btn btn-primary" @click="confirmBooking(booking.id, 1)">{{ $t('ConfirmBooking') }}</button>
                     </template>
                     <button class="btn btn-danger mx-2" @click="deleteBooking(booking.id)" style="float: right;">{{ $t('Delete') }}</button>
-                    <button class="btn btn-info" @click="changeBooking(booking)" style="float: right;">{{ $t('Change') }}</button>
+                    <button v-if="isEdit != booking.id" class="btn btn-info" @click="changeBooking(booking)" style="float: right;">{{ $t('Change') }}</button>
+                    <button v-if="isEdit == booking.id" class="btn btn-secondary" @click="cancelEdit" style="float: right;" >{{ $t('Cancel') }}</button>
                 </div>
             </div>
             <UpdateBookedRoomComponent :booking="booking" :options="options" :ref="`editBooking_${booking.id}`"></UpdateBookedRoomComponent>
@@ -54,7 +55,7 @@ export default {
     data() {
         return {
             date: null,
-            rooms: null,
+            hasRooms: null,
             bookings: null,
             isEdit: null,
             options: null,
@@ -69,6 +70,7 @@ export default {
         let endDate = this.$cookies.get("endDate");
         endDate = endDate == null ? new Date(new Date().setDate(startDate.getDate() + 7)) : endDate;
         this.date = [startDate, endDate];
+        this.doYouHaveRooms();
         this.getBockedRooms();
 
     },
@@ -78,6 +80,14 @@ export default {
             this.$cookies.set("startDate", new Date(this.date[0]).toISOString(), "1h");
             this.$cookies.set("endDate", new Date(this.date[1]).toISOString(), "1h");
             this.getBockedRooms();
+        },
+
+        doYouHaveRooms() {
+            axios.get('/api/ThisUserHasRooms')
+            .then(res => {
+                this.hasRooms = res.data.length;
+                console.log(res.data.length);
+            })
         },
 
         getBockedRooms() {
@@ -142,6 +152,7 @@ export default {
                     .then(res => {
                         console.log(res.data);
                         this.getBockedRooms();
+                        this.isEdit = null;
                     })
                     .catch(err => {
                         console.log(err);
@@ -164,6 +175,10 @@ export default {
                 console.log(err);
                 this.options = null;
             })
+        },
+
+        cancelEdit() {
+            this.isEdit = null;
         },
     },
 

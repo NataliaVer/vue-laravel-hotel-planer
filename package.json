@@ -20,6 +20,7 @@
         "@intlify/unplugin-vue-i18n": "^0.11.0",
         "@vuepic/vue-datepicker": "^5.4.0",
         "laravel-vue-i18n": "^2.5.1",
+        "laravel-vue-pagination": "^4.1.1",
         "vue": "^3.2.36",
         "vue-cookies": "^1.8.3",
         "vue-i18n": "^9.2.2",

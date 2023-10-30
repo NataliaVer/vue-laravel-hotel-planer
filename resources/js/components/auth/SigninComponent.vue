@@ -24,7 +24,9 @@
     <template v-if="errors">
         <div class="alert alert-danger">
             <ul>
-                <li>{{ errors }}</li>
+              <template v-for="error in errors">
+                <li>{{ $t(error[0]) }}</li>
+              </template>
             </ul>
         </div>
     </template>
@@ -61,8 +63,8 @@ export default {
         this.$store.dispatch('getIsGuest');
       })
       .catch(error => {
-        console.log(error);
-        this.errors = error.response.data.message;
+        // console.log(error.response.data.errors);
+        this.errors = error.response.data.errors;
       });
     },
   },

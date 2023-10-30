@@ -47,7 +47,7 @@
 
             <div>
                 <button class="btn btn-primary mx-2" @click="sentData(booking.id)">{{ $t('Sent') }}</button>
-                <button class="btn btn-secondary" @click="cancelEdit">{{ $t('Cancel') }}</button>
+                <!-- <button class="btn btn-secondary" @click="cancelEdit">{{ $t('Cancel') }}</button> -->
             </div>
         </div>
     </div>

@@ -22,6 +22,7 @@ class ListOfBookedRoomController extends Controller
             $response['message'] = 'Do not valide date';
             return $response;
 
+            //it is not for delete metod, only use get
             // return back()->withErrors(['message' => 'Do not valide date']);
         }
 
@@ -37,5 +38,14 @@ class ListOfBookedRoomController extends Controller
                                                  })->get();
 
         return $booked_rooms;
+    }
+
+    //check if this user have rooms in hotel
+    //before create reservations
+    public function UsersRooms() {
+
+        $user = Auth::user();
+
+        return $user->rooms;
     }
 }

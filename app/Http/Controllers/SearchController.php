@@ -18,12 +18,13 @@ class SearchController extends Controller
                                     ->OrWhere('settlement', 'like', $city.'%')
                                     ->groupBy('city', 'settlement')
                                     ->orderBy('city')
-                                    ->get();
+                                    ->paginate(20);
+                                    // ->get();
 
-        $response['status'] = count($hotels)>0 ? true : false;
-        $response['cities'] = $hotels;
+        // $response['status'] = count($hotels)>0 ? true : false;
+        // $response['cities'] = $hotels;
 
-        return response()->json($response);
+        return response()->json($hotels);
     }
 
     public function searchHotels(Request $req) {
@@ -35,40 +36,45 @@ class SearchController extends Controller
         
         if (!$city) {
             $response['status'] = false;
-            $response['message'] = 'Укажіть місто';
+            $response['message'] = 'Please, specify the city';
 
-            return response()->json($response, 422);
+            return response()->json($response);
         }
 
         if (!$dateFrom || !$dateTo) {
             $response['status'] = false;
-            $response['message'] = 'Заповнять дати бажаного бронювання';
+            $response['message'] = 'Fill in the desired reservation dates';
 
-            return response()->json($response, 422);
+            return response()->json($response);
         }
 
+        //We get min price of rooms, at first we get hotels with condition,
+        //becouse we need not all rooms, if it will be match, we get slow query
         $all_hotels_id = DB::table('hotels')->where('city','like', $city.'%')
-                                         ->selectRaw('id as userhotel_id');
+                                            ->leftJoin('rooms', function ($join) {
+                                                    $join->on('hotels.id', '=', 'rooms.hotel_id');
+                                                })
+                                            ->select(DB::raw('min(price) as min_price, hotel_id'))
+                                            ->groupBy('hotel_id');
 
-        $hotels = DB::table('hotels')->where('city','like', $city.'%')
+        $hotels = DB::table('hotels')->where('hotels.city','like', $city.'%')
                                     ->leftJoinSub($all_hotels_id, 'all_id_hotel', function ($join) {
-                                        $join->on('hotels.id', '=', 'all_id_hotel.userhotel_id');
+                                        $join->on('hotels.id', '=', 'all_id_hotel.hotel_id');
                                     })
-                                    // ->leftJoin('users', 'hotels.user_id', '=', 'users.id')
                                     ->leftJoin('photos', function ($join) {
                                         $join->on('hotels.id', '=', 'photos.hotel_id')
                                              ->where('photos.kind_photo', '=', 'baground_photo');
                                     })
+                                    ->select('hotels.*', 'photos.photo', 'photos.kind_photo', 'photos.hotel_id', 'min_price')
                                     ->orderBy('city')
-                                    ->get();
-
-                                    // dd($hotels);
+                                    // ->get();
+                                    ->paginate(10);
 
         if (count($hotels)<1) {
             $response['status'] = false;
-            $response['message'] = 'За вашим запитом не знайдено жодного готеля';
+            $response['message'] = 'No hotel was found for your request';
 
-            return response()->json($response, 422);
+            return response()->json($response);
         }
         
         $response['status'] = true;

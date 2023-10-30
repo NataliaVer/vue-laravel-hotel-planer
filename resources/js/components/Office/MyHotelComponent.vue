@@ -16,35 +16,35 @@
             <tbody>
                 <tr id="hotel_id">
                     <td class="text-nowrap align-middle">{{ $t('HotelName') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ hotel_name }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ hotel_name }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="hotel_name" class="form-control">
                     </td>
                 </tr>
                 <tr>
                     <td class="text-nowrap align-middle">{{ $t('Country') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ country }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ country }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="country" class="form-control">
                     </td>
                 </tr>
                 <tr>
                     <td class="text-nowrap align-middle">{{ $t('City') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ city }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ city }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="city" class="form-control">
                     </td>
                 </tr>
                 <tr>
                     <td class="text-nowrap align-middle">{{ $t('Settlement') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ settlement }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ settlement }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="settlement" class="form-control">
                     </td>
                 </tr>
                 <tr>
                     <td class="text-nowrap align-middle">{{ $t('Street') +', '+ $t('NumberHouse') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ street }}, {{ number_house }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ street }}, {{ number_house }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <div class="row g-2">
                         <input type="text" v-model="street" class="form-control" placeholder="Street">
@@ -54,14 +54,14 @@
                 </tr>
                 <tr>
                     <td class="text-nowrap align-middle">{{ $t('HotelPhone') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ phone }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ phone }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="phone" class="form-control">
                     </td>
                 </tr>
                 <tr>
-                    <td class="align-middle">{{ $t('HotelAdditionalServices') }}</td>
-                    <td v-if="!change && hotel" class="text-nowrap align-middle">{{ aditional_services }}</td>
+                    <td class="text-nowrap align-middle">{{ $t('HotelAdditionalServices') }}</td>
+                    <td v-if="!change && hotel" class="align-middle">{{ aditional_services }}</td>
                     <td v-if="change || !hotel" class="text-nowrap align-middle">
                         <input type="text" v-model="aditional_services" class="form-control">
                     </td>

@@ -4,8 +4,8 @@
         <img src="/img/border_view.jpg" alt="...">
     </div>
 
-    <div class="container">
-        <form method="post" class="row">
+    <div class="container mb-2">
+        <template class="row">
             <div class="row wrapper">
                 <div class="form-group col-md-4 my-2">
                     <input type="text" class="form-control" v-model="city" @input="searchCity()" list="CityList"
@@ -45,11 +45,11 @@
                     <a href="#" class="w-100 btn btn-primary" @click.prevent="searchHotels()">{{ $t('Find') }}</a>
                 </div>
             </div>
-        </form>
+        </template>
 
-        <template v-if="hotels">
+        <template v-if="hotels && hotels.data.length > 0">
             <div class="my-3">
-                <template v-for="hotel in hotels">
+                <template v-for="hotel in hotels.data">
                     <div>
                         <div class="card mb-3" style="max-width: 640px;">
                             <div class="row g-0">
@@ -63,9 +63,11 @@
                                             <h5 class="card-title">{{ hotel.hotel_name }}</h5>
                                         </router-link>
                                         <p class="card-text"><small class="text-muted">{{ hotel.city }},
-                                                {{ hotel.settlement }}</small></p>
-                                        <p class="card-text">{{ hotel.description }}</p>
-                                        <p class="card-text"><small class="text-muted">{{ hotel.aditional_services }}</small>
+                                                {{ hotel.settlement }}, {{ hotel.street }}, {{ hotel.number_house }}</small></p>
+                                        <p class="card-text">{{ cutDown(hotel.description, 100) }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ cutDown(hotel.aditional_services, 50) }}</small>
+                                            <!-- Add the ability to change currency -->
+                                        <p class="card-text">{{$t('MinPrice')}}: {{ countDays() * hotel.min_price }}</p>
                                         </p>
                                     </div>
                                 </div>
@@ -74,11 +76,23 @@
                     </div>
                 </template>
             </div>
+            <Bootstrap5Pagination showDisabled align="center" :data="hotels" @pagination-change-page="listOfHotels"></Bootstrap5Pagination>
         </template>
+
+        <template v-if="errors">
+            <div class="alert alert-danger mt-3">
+            <ul>
+                <li>{{ $t(errors) }}</li>
+            </ul>
+        </div>
+        </template>
+        
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 
 export default {
 
@@ -89,11 +103,11 @@ export default {
             dateToHome: new Date(+new Date() + 86400000).toLocaleDateString('fr-CA'),
             cities: null,
             hotels: null,
+            errors: null,
         }
     },
 
     mounted() {
-        console.log('Component mounted.')
     },
 
     methods: {
@@ -110,28 +124,54 @@ export default {
         },
 
         searchCity() {
+            this.errors = null;
             this.cities = null;
             axios.get('/api/searchCity', { nameCity: this.city })
                 .then(res => {
-                    this.cities = res.data.cities;
+                    this.cities = res.data.data;
                 })
-                .catch(error => { })
+                // .catch(error => { })
         },
 
         searchHotels() {
+            this.errors = null;
             this.hotels = null;
             axios.post('/api/searchHotels', {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome})
                 .then(res => {
-                    this.hotels = res.data.hotels;
-                    console.log(res);
+                    if(res.data.status){
+                        this.hotels = res.data.hotels;
+                    }
+                    this.errors = res.data.message;
+                    // console.log(res);
                 })
                 .catch(error => {
-                    console.log(error.response.data.message);
+                    this.errors = error.response.data.message;
+                    // console.log(error.response.data.message);
                 })
         },
+
+        countDays() {
+            return new Date(this.dateToHome).getDate()-new Date(this.dateFromHome).getDate();
+        },
+
+         cutDown(content, len){
+            if(content.length > len) {
+                return content.slice(0, len) + '...';
+            }
+            return content;
+         },
+
+         listOfHotels(page=1) {
+            axios.post(`/api/searchHotels?page=${page}`, {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome})
+            .then(res  => {
+                // console.log(res);
+                this.hotels = res.data.hotels;
+            })
+         },
     },
 
     components: {
+        Bootstrap5Pagination
     },
 }
 </script>
