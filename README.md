@@ -18,7 +18,8 @@
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/c49a8258-2f3a-4bfb-964a-7fcf70c4e7ad)
 
 Бічна панель  допоможе в роботі з особистим кабінетом користувача 
-![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/02f98fde-9d92-491f-9206-08a69b9cbf9c)
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/bcc7a9dc-d950-4ad3-9bc8-aa10c6ec9282)
+
 
 Тут є можливість додати готель, кімнати та їх опис
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/84148b3a-7dbe-481f-9110-7041bb058880)
