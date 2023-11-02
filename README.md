@@ -18,15 +18,16 @@
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/c49a8258-2f3a-4bfb-964a-7fcf70c4e7ad)
 
 Бічна панель  допоможе в роботі з особистим кабінетом користувача 
+
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/bcc7a9dc-d950-4ad3-9bc8-aa10c6ec9282)
 
-
 Тут є можливість додати готель, кімнати та їх опис
+
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/84148b3a-7dbe-481f-9110-7041bb058880)
 
 Також є можливість в особистому кабінеті додавати, видаляти та редагувати бронювання (функція підтвердження створена для можливості вказати чи була передплата при бронюванні номерів)
 
-![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/12162f48-67c4-40b5-85d0-ae035a1786a1)
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/1bbee079-06d4-4f0a-aaf0-efafd636d7fa)
 
 Також додано можливість зміни мови, але в даний момент працюю над можливістю перекладу користувацьких записів.
 
