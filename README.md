@@ -15,7 +15,7 @@
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/6d891f1a-cb52-4f87-a9f4-62df0b81a3c1)
 
 Також є можливість зареєструватися в системі (або увійти у свій кабінет) та додати власний готель
-![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/958ab319-563c-46a9-9214-ff829966bb09)
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/c49a8258-2f3a-4bfb-964a-7fcf70c4e7ad)
 
 Бічна панель  допоможе в роботі з особистим кабінетом користувача 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/02f98fde-9d92-491f-9206-08a69b9cbf9c)
