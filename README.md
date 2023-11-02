@@ -6,7 +6,8 @@
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/caaf6176-f672-4020-9c22-28becf0a54e0)
 
 Після натискання кнопки "Зарезервувати" система запропонує ввести особисті дані і після підтвердження вони додадутся в базу даних
-![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/2c2442ef-8bff-4538-8b74-69ea97fb46f9)
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/842162ba-81e6-4850-842e-2bf0832f7dea)
+
 про що і сповістить система
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/6d891f1a-cb52-4f87-a9f4-62df0b81a3c1)
 
