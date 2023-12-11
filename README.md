@@ -1,66 +1,38 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Система бронювання готелів. Проект розроблено на Laravel 10, Vue JS 3 та за допомогою Bootstrap5.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/b1da629d-066c-4c7f-9191-001056a3b953)
 
-## About Laravel
+Для резервування готелів розроблено меню вибору дат бронювання та міста (список міст вибирається з бази даних зареєстрованих готелів). Клікабельний заголовок картки готелю відкриває сторінку з описом, та можливістю забронювати потрібну кімнату, перед бронюванням є можливість змінити дату
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/caaf6176-f672-4020-9c22-28becf0a54e0)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Після натискання кнопки "Зарезервувати" система запропонує ввести особисті дані і після підтвердження вони додадутся в базу даних
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/7794c606-c811-4b89-aa37-4771b0126d0e)
 
-## Learning Laravel
+про що і сповістить система.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/6d891f1a-cb52-4f87-a9f4-62df0b81a3c1)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Також є можливість зареєструватися в системі (або увійти у свій кабінет) та додати власний готель
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/c49a8258-2f3a-4bfb-964a-7fcf70c4e7ad)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Бічна панель  допоможе в роботі з особистим кабінетом користувача 
 
-## Laravel Sponsors
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/bcc7a9dc-d950-4ad3-9bc8-aa10c6ec9282)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Тут є можливість додати готель, кімнати та їх опис
 
-### Premium Partners
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/84148b3a-7dbe-481f-9110-7041bb058880)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Також є можливість в особистому кабінеті додавати, видаляти та редагувати бронювання (функція підтвердження створена для можливості вказати чи була передплата при бронюванні номерів)
 
-## Contributing
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/1bbee079-06d4-4f0a-aaf0-efafd636d7fa)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Також додано можливість зміни мови, але в даний момент працюю над можливістю перекладу користувацьких записів.
 
-## Code of Conduct
+![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/23987aef-6328-4952-bac0-5a09ba4aa8c7)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
