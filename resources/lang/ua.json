@@ -17,8 +17,8 @@
     "AdditionalServices": "Додаткові послуги:",
     "Check-inTime": "Час заселення:",
     "EvictionTime": "Час виїзду:",
-    "CallUs": "Зфтелефонуйте нам:",
-    "SelectDate": "Оберіть дати проживання, щоб переглянути ціни і номери:",
+    "CallUs": "Зателефонуйте нам:",
+    "SelectDate": "Оберіть дати:",
     "PricesRooms": "Ціни, номери",
     "AmenitiesInTheRoom": "Зручності в номері:",
     "Price": "Ціни:",
@@ -114,5 +114,8 @@
     "The password field must be at least 8 characters.": "Поле пароля має містити не менше 8 символів.",
     "The password field confirmation does not match.": "Поле підтвердження пароля не збігається.",
     "The email has already been taken.": "Електронна пошта вже зайнята.",
-    "These credentials do not match our records.": "Облікові дані не збігаються"
+    "These credentials do not match our records.": "Облікові дані не збігаються",
+    "DoYouWantToDeleteYourHotel": "Ви дійсно хочете видалити ваш готель?",
+    "Hotel was deleted success": "Готель успішно видалено",
+    "It is not possible to remove the hotel, it has a reservation": "Видалити готель неможливо, в ньому є бронювання"
 }

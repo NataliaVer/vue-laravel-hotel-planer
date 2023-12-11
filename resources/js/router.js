@@ -55,7 +55,7 @@ const router = createRouter({
         {
             path: '/my_hotel',
             name: 'my_hotel',
-            component: () => import('./components/Office/MyHotelComponent.vue'),
+            component: () => import('./components/Office/Hotel/MyHotelComponent.vue'),
             meta: { guest: false},
         },
         {
@@ -87,7 +87,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
 
-    if(!to.meta.guest && store.getters.guest) {
+    if(to.meta.guest === false && store.getters.guest === 1) {
         return {
             path: '/signin',
         }

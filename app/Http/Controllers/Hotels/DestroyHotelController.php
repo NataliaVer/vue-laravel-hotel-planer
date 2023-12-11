@@ -34,13 +34,20 @@ class DestroyHotelController extends Controller
                 $room->photos()->delete();
             }
 
+            foreach($hotel->rooms() as $room) {
+                if(count($room->translations()) > 0) {
+                    $room->translations()->delete();
+                }
+            }
+
             $hotel->rooms()->delete();
             $hotel->photos()->delete();
+            $hotel->translations()->delete();
             $hotel->delete();
 
             // return redirect()->route('userhotel');
             $response['status'] = true;
-            $response['message'] = 'Готель успішно видалено';
+            $response['message'] = 'Hotel was deleted success';
             return $response;
         }
         
@@ -48,8 +55,8 @@ class DestroyHotelController extends Controller
         //         'message' => 'Неможливо видалити готель, для нього є бронювання'
         //     ]);
         $response['status'] = false;
-        $response['message'] = 'Неможливо видалити готель, для нього є бронювання';
-        return $response;
+        $response['message'] = 'It is not possible to remove the hotel, it has a reservation';
+        return response($response, 422);
 
     }
 }

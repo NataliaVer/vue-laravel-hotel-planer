@@ -9,7 +9,7 @@ class Hotel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'hotel_name', 'country', 'city', 'settlement', 'street', 'number_house', 'phone', 'aditional_services', 'description', 'time_of_settlement', 'time_of_eviction'];
+    protected $fillable = ['user_id', 'hotel_name', 'country', 'city', 'settlement', 'street', 'number_house', 'phone', 'aditional_services', 'description', 'time_of_settlement', 'time_of_eviction', 'language'];
 
     public function rooms() {
         return $this->hasMany(Room::class, 'hotel_id', 'id');
@@ -22,5 +22,13 @@ class Hotel extends Model
 
     public function photos() {
         return $this->hasMany(Photo::class, 'hotel_id', 'id');
+    }
+
+    public function translations() {
+        return $this->hasMany(HotelTranslations::class, 'hotel_id', 'id');
+    }
+
+    public function translate($langId) {
+        return $this->translations()->where('language_id', $langId)->first();
     }
 }

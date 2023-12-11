@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     public function hotel() {
-        return $this->hasOne(Hotel::class, 'user_id', 'id');
+        return $this->hasMany(Hotel::class, 'user_id', 'id');
     }
 
     public function rooms() {

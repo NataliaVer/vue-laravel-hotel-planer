@@ -14,9 +14,12 @@ class GetHotelController extends Controller
             $hotel = $user->hotel;
             $photos = $user->photos;
 
+            // $translations = $hotel[0]->translations;
+
             return [
                 'hotel' => $hotel,
-                'photos' => $photos
+                'photos' => $photos,
+                'translations' => count($hotel)>0 ? $hotel[0]->translations : [],
             ];
     }
 }

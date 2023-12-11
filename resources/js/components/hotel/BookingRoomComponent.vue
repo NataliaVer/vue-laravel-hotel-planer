@@ -15,13 +15,19 @@
                             </div>
                         </template>
                     </template>
+                    <template v-if="hotel.hotel_translations">
+                <template v-for="hotel_translate in hotel.hotel_translations">
+                    <template v-if="langName() == hotel_translate.lang_code">
                     <div class="text-start align-self-end">
-                        <h4>{{ hotel.hotel.hotel_name }}</h4>
-                        <h6>{{ hotel.hotel.settlement }}, {{ hotel.hotel.street }}, {{
-                            hotel.hotel.number_house }}</h6>
+                        <h4>{{ hotel_translate.hotel_name }}</h4>
+                        <h6>{{ hotel_translate.settlement }}, {{ hotel_translate.street }}, {{
+                            hotel_translate.number_house }}</h6>
                         <p>{{ $t('CheckIn') }}: {{ new Date(this.$route.params.dateFrom).toLocaleDateString('ua') }}</p>
                         <p>{{ $t('CheckOut') }}: {{ new Date(this.$route.params.dateTo).toLocaleDateString('ua') }}</p>
                     </div>
+                    </template>
+                    </template>
+                    </template>
                 </template>
             <!-- </div> -->
         </div>
@@ -61,6 +67,7 @@
 </template>
 
 <script>
+import { getActiveLanguage } from 'laravel-vue-i18n';
 import axios from 'axios';
 
 export default {
@@ -101,7 +108,11 @@ export default {
             .catch(error => {
                 this.errors = error.response.data.message;
             })
-        }
+        },
+
+        langName() {
+            return getActiveLanguage();
+        },
     },
 
     computed: {

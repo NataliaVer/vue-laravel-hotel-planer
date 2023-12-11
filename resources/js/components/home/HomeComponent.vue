@@ -60,12 +60,12 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <router-link :to="`/hotel/${hotel.hotel_id}/${dateFromHome}/${dateToHome}`">
-                                            <h5 class="card-title">{{ hotel.hotel_name }}</h5>
+                                            <h5 class="card-title">{{ hotel[translate('hotel_name')] }}</h5>
                                         </router-link>
-                                        <p class="card-text"><small class="text-muted">{{ hotel.city }},
-                                                {{ hotel.settlement }}, {{ hotel.street }}, {{ hotel.number_house }}</small></p>
-                                        <p class="card-text">{{ cutDown(hotel.description, 100) }}</p>
-                                        <p class="card-text"><small class="text-muted">{{ cutDown(hotel.aditional_services, 50) }}</small>
+                                        <p class="card-text"><small class="text-muted">{{ hotel[translate('city')] }},
+                                                {{ hotel[translate('settlement')] }}, {{ hotel[translate('street')] }}, {{ hotel[translate('number_house')] }}</small></p>
+                                        <p class="card-text">{{ cutDown(hotel[translate('description')], 100) }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ cutDown(hotel[translate('aditional_services')], 50) }}</small>
                                             <!-- Add the ability to change currency -->
                                         <p class="card-text">{{$t('MinPrice')}}: {{ countDays() * hotel.min_price }}</p>
                                         </p>
@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+import { getActiveLanguage } from 'laravel-vue-i18n';
 
 export default {
 
@@ -104,10 +104,16 @@ export default {
             cities: null,
             hotels: null,
             errors: null,
+            results: null,
         }
     },
 
+    setup() {
+    },
+
     mounted() {
+        // this.translater(2);
+        // console.log(this.translater(2));
     },
 
     methods: {
@@ -126,21 +132,25 @@ export default {
         searchCity() {
             this.errors = null;
             this.cities = null;
-            axios.get('/api/searchCity', { nameCity: this.city })
+            axios.get(`/api/searchCity?nameCity=${this.city}&lang=${getActiveLanguage()}`)
                 .then(res => {
                     this.cities = res.data.data;
                 })
-                // .catch(error => { })
+                .catch(error => {
+                    console.log(error);
+                })
         },
 
         searchHotels() {
             this.errors = null;
             this.hotels = null;
-            axios.post('/api/searchHotels', {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome})
+            axios.post('/api/searchHotels', {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome, lang: getActiveLanguage()})
                 .then(res => {
                     if(res.data.status){
+                        console.log(res.data);
                         this.hotels = res.data.hotels;
                     }
+                    console.log(res);
                     this.errors = res.data.message;
                     // console.log(res);
                 })
@@ -162,12 +172,16 @@ export default {
          },
 
          listOfHotels(page=1) {
-            axios.post(`/api/searchHotels?page=${page}`, {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome})
+            axios.post(`/api/searchHotels?page=${page}`, {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome, lang: getActiveLanguage()})
             .then(res  => {
                 // console.log(res);
                 this.hotels = res.data.hotels;
             })
          },
+
+         translate(name) {
+                return `${name}_${getActiveLanguage()}`
+            },
     },
 
     components: {
@@ -196,8 +210,10 @@ export default {
     position: absolute;
     font-style: italic !important;
     color: lightcyan;
-    top: 30%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
 }
 
 .user-hotel-form {

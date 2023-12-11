@@ -34,7 +34,8 @@ class StoreHotelRequest extends FormRequest
             'time_of_settlement' => 'required',
             'time_of_eviction' => 'required',
             'baground_photo' => 'required',
-            'all_photos' => ''
+            'all_photos' => '',
+            'lang_code' => 'required'
             ];
     }
 }

@@ -8,7 +8,7 @@
     </div>
     <template v-if="hasRooms">
         <div class="text-center">
-        <router-link to="add_reservation"><button type="button" class="btn btn-primary mb-3">Add Reservation</button></router-link>
+        <router-link to="add_reservation"><button type="button" class="btn btn-primary mb-3">{{ $t('AddReservationButton') }}</button></router-link>
     </div>
     </template>
     <template v-else>

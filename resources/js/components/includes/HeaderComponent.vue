@@ -24,18 +24,21 @@
     </div>
 
     <!-- Locale Selector -->
-    <div class="dropdown col-md-auto px-2">
+    <div class="dropdown col-md-auto px-2" v-if="languages">
     <a class="btn btn-light dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ language }}</a>
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#" @click.prevent="switchLanguageTo('en')"><img src="https://flagsapi.com/US/flat/32.png" alt=""> English</a></li>
-        <li><a class="dropdown-item" href="#" @click.prevent="switchLanguageTo('ua')"><img src="https://flagsapi.com/UA/flat/32.png" alt=""> Ukrainian</a></li>
+      <template v-for="lang in languages">
+        <li><a class="dropdown-item" href="#" @click.prevent="switchLanguageTo(lang.code)"><img :src="`https://flagsapi.com/${flagName(lang.code)}/flat/32.png`" alt=""> {{ lang.name}}</a></li>
+      </template>
     </ul>
 </div>
   </header>
 </template>
+<!-- <li><a class="dropdown-item" href="#" @click.prevent="switchLanguageTo('ua')"><img src="https://flagsapi.com/UA/flat/32.png" alt=""> Ukrainian</a></li> -->
 
 <script>
-import { loadLanguageAsync } from 'laravel-vue-i18n';
+import axios from 'axios';
+import { loadLanguageAsync, getActiveLanguage } from 'laravel-vue-i18n';
 
 export default {
 
@@ -43,19 +46,22 @@ export default {
 
   data() {
     return {
-      language: 'en',
+      language: getActiveLanguage(),
+      languages: null,
     };
   },
 
   mounted() {
       this.$store.dispatch('getIsGuest');
       // this.$store.dispatch('getLang',{lang: this.language});
+      this.getListOfLanguage();
     },
 
   methods: {
     switchLanguageTo(language) {
       this.language = language;
       loadLanguageAsync(this.language);
+      console.log('switch language');
       // this.$store.dispatch('getLang',{lang: language});
     },
     Logout() {
@@ -66,12 +72,21 @@ export default {
       })
     },
 
-    // isGuestNow() {
-    //   axios.get(`/api/getUser`)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    // },
+    getListOfLanguage() {
+      axios.get('/api/all_languages')
+      .then(res => {
+        this.languages = res.data;
+        // console.log(res.data);
+      })
+    },
+
+    flagName(lang) {
+      return lang == 'en' ? 'US' : lang.toUpperCase();
+    },
+
+    translater() {
+      console.log('translate');
+    },
   },
 
   computed: {

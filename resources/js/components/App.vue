@@ -1,7 +1,7 @@
 <template>
     <AssideComponent></AssideComponent>
     <div :style="{ 'margin-left': sidebarWidth }">
-        <HeaderComponent></HeaderComponent>
+        <HeaderComponent ref="translater"></HeaderComponent>
         <router-view></router-view>
         <FooterComponent></FooterComponent>
     </div>
@@ -11,15 +11,27 @@
 import HeaderComponent from './includes/HeaderComponent.vue';
 import FooterComponent from './includes/FooterComponent.vue';
 import AssideComponent from './Office/AssideComponent.vue';
-import { sidebarWidth } from './Office/state';
+import { sidebarWidth, collapsed, toggleSidebar } from './Office/state';
+import { getActiveLanguage } from 'laravel-vue-i18n';
+import axios from 'axios';
 
 export default {
 
+    data() {
+    return {
+      langs: null,
+    };
+  },
+
     setup() {
-        return { sidebarWidth }
+        return { sidebarWidth, collapsed }
     },
 
     mounted() {
+        if(collapsed) {
+            toggleSidebar();
+        }
+        this.getLangs();
     },
 
     methods: {
@@ -79,6 +91,39 @@ export default {
                     return null;
                 }
             });
+        },
+
+        translater(id, table, translated) {
+            if(table == 'h') {
+                axios.get(`/api/translate_hotel/${id}/${getActiveLanguage()}`)
+                .then(res => {
+                    // console.log(res.data.name);
+                    translated = res.data.name;
+                    // return res.data.name;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            }
+            // return getActiveLanguage() + ' ' + id + ' ' + table;
+        },
+
+        getLangs(){
+            axios.get('/api/all_languages')
+            .then(res => {
+              this.langs = res.data;
+            })
+        },
+
+        langId() {
+            if(this.langs){
+            this.langs.forEach(lang => {
+                if(lang.code == getActiveLanguage()) {
+                    console.log(lang);
+                    // return lang.id;
+                }
+            });
+        }
         },
 
     },

@@ -18,7 +18,7 @@
     "Check-inTime": "Check-in time",
     "EvictionTime": "Eviction time:",
     "CallUs": "Call us:",
-    "SelectDate": "Select the dates of your stay to view prices and rooms:",
+    "SelectDate": "Select the dates:",
     "PricesRooms": "Prices, Rooms",
     "AmenitiesInTheRoom": "Amenities in the room:",
     "Price": "Price:",
@@ -103,5 +103,6 @@
     "Cancel": "Cancel",
     "UpdateBookedRoomComponentHeader": "Update reservation data",
     "YouNeedCreateRooms": "To create a reservation, first fill the rooms",
-    "MinPrice": "Price from"
+    "MinPrice": "Price from",
+    "DoYouWantToDeleteYourHotel": "Do you want to delete your hotel?"
 }

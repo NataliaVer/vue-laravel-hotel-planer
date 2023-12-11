@@ -14,8 +14,8 @@ class HotelController extends Controller
 {
     public function show(Hotel $hotel, $dateFrom, $dateTo) {
 
-        $user = $hotel->user;
-        $photos = $user->photos;
+        $photos =  $hotel->photos;
+        $hotel_translations = $hotel->translations;
 
         //умова whereBetween в значенні >= і <=, а нам потрібно > і <
 
@@ -36,15 +36,21 @@ class HotelController extends Controller
                                                  ->groupBy('room_id');
 
 
-        $rooms = DB::table('rooms')->where('hotel_id','=', $hotel->id)
+        $rooms = Room::where('hotel_id','=', $hotel->id)
                                     ->leftJoinSub($booked_rooms, 'booked_rooms', function ($join) {
                                         $join->on('rooms.id', '=', 'booked_rooms.room_id');
                                     })
                                    ->get();
+
+        foreach($rooms as $room) {
+          $room_translations = $room->translations;
+          $room['translations'] = $room_translations;
+        }
         
         $response['hotel'] = $hotel;
         $response['rooms'] = $rooms;
         $response['photos'] = $photos;
+        $response['hotel_translations'] = $hotel_translations;
 
         return $response;
 

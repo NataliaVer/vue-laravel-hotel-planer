@@ -58,3 +58,7 @@ Route::get('/listAvialableRooms/{id}/{dateFrom}/{dateTo}', [App\Http\Controllers
 Route::post('/storeBookingRoom', [App\Http\Controllers\BokingRooms\StoreBookedRoomController::class, 'index'])->middleware('auth');
 Route::get('/ThisUserHasRooms', [App\Http\Controllers\BokingRooms\ListOfBookedRoomController::class, 'UsersRooms'])->middleware('auth');
 
+//languages
+Route::get('/all_languages', [App\Http\Controllers\Languages\LanguageController::class, 'index']);
+Route::get('/translate_hotel/{hotel}/{lang}', [App\Http\Controllers\Languages\LanguageController::class, 'getTranslateOfHotel']);
+
