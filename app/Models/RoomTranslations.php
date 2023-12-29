@@ -9,9 +9,13 @@ class RoomTranslations extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'amenities', 'price', 'count_one_bed', 'count_two_bed', 'count_rooms', 'room_id', 'lang_code'];
+    protected $fillable = ['name', 'description', 'amenities', 'price', 'count_bed', 'count_seats_in_bed', 'count_rooms', 'room_id', 'lang_code'];
 
     public function language() {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
+        return $this->belongsTo(Language::class, 'lang_code', 'code');
+    }
+
+    public function room() {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

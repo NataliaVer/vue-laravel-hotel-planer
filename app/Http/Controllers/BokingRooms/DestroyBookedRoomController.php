@@ -13,7 +13,9 @@ class DestroyBookedRoomController extends Controller
         
         if($bookingroom->confirmed) {
             // return back()->withErrors(['err' => "You can't delete confirmed booking"]);
-            return "You can't delete confirmed booking";
+            $response['status'] = false;
+            $response['message'] = "You can't delete confirmed booking";
+            return $response;
         }
         $bookingroom->delete();
 

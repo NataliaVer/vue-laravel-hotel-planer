@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Photo;
 use App\Models\Hotel;
+use App\Models\Language;
+use App\Events\EditedHotel;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 use App\Http\Requests\Hotel\UpdateHotelRequest;
 
@@ -15,13 +19,18 @@ class UpdateHotelController extends Controller
 {
     public function index(UpdateHotelRequest $request, Hotel $hotel) {
 
-        // return $request->all();
-
         $user = Auth::user();
+
+        $lang_code = $request->post('lang_code');
 
         $data = $request->validated();
 
         $hotel->update($data);
+
+        $translate = $hotel->translate($lang_code);
+        $translate->update($data);
+
+        event(new EditedHotel($translate));
 
         if($request->hasFile('baground_photo')) {
             
@@ -37,8 +46,9 @@ class UpdateHotelController extends Controller
             $photo = $user->photos()->where('kind_photo', 'baground_photo')->first();
             //опрацювати видалення файлів
             if($photo) {
-                if (File::exists(mb_substr($photo->photo,1))) {
-                    unlink(public_path($photo->photo));
+                $path = str_replace('/storage/', '',$photo->photo);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
                 }
                 $photo->update($photoData);
             } else {
@@ -57,8 +67,9 @@ class UpdateHotelController extends Controller
             $photos_old = $user->photos()->where('kind_photo', 'all_photos')->get();
 
             foreach ($photos_old as $photo) {
-                if (File::exists(mb_substr($photo->photo,1))) {
-                    unlink(public_path($photo->photo));
+                $path = str_replace('/storage/', '',$photo->photo);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
                 }
             }
             $photos_old_del = $user->photos()->where('kind_photo', 'all_photos')->delete();

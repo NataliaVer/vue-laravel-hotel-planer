@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DestroyHotelController extends Controller
 {
@@ -27,15 +28,16 @@ class DestroyHotelController extends Controller
             foreach ($rooms as $room) {
                 $photos = $hotel->photos;
                 foreach ($photos as $photo) {
-                    if (File::exists(mb_substr($photo->photo,1))) {
-                        unlink(public_path($photo->photo));
+                    $path = str_replace('/storage/', '',$photo->photo);
+                    if (Storage::disk('public')->exists($path)) {
+                        Storage::disk('public')->delete($path);
                     }
                 }
                 $room->photos()->delete();
             }
 
-            foreach($hotel->rooms() as $room) {
-                if(count($room->translations()) > 0) {
+            foreach($hotel->rooms as $room) {
+                if(count($room->translations) > 0) {
                     $room->translations()->delete();
                 }
             }

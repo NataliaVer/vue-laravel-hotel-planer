@@ -104,5 +104,6 @@
     "UpdateBookedRoomComponentHeader": "Update reservation data",
     "YouNeedCreateRooms": "To create a reservation, first fill the rooms",
     "MinPrice": "Price from",
-    "DoYouWantToDeleteYourHotel": "Do you want to delete your hotel?"
+    "DoYouWantToDeleteYourHotel": "Do you want to delete your hotel?",
+    "DoYouWantToDeleteThisRoom": "Do you want to delete this room?"
 }

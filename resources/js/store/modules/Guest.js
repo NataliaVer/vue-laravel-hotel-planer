@@ -1,5 +1,5 @@
 const state = {
-    guest: true
+    guest: localStorage.getItem('guest')
 }
 
 const getters = {
@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
     getIsGuest({state,commit,dispatch}) {
-        axios.get(`/api/isGuest`)
+        axios.get(`/api/authenticated`)
             .then(data => {
                 commit('setIsGuest', data.data)
             })

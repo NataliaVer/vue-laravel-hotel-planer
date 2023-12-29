@@ -86,7 +86,6 @@ export default {
 
     data() {
         return {
-            errors: null,
             hotel_name: null,
             country: null,
             city: null,
@@ -133,7 +132,7 @@ export default {
 
         createHotel() {
 
-            this.errors = null;
+            this.$parent.errors = null;
             const newHotelData = this.createDataHotel();
 
             console.log(newHotelData);
@@ -146,7 +145,7 @@ export default {
                 })
                 .catch(err => {
                     console.log(err);
-                    this.errors = err.response.data.errors;
+                    this.$parent.errors = err.response.data.errors;
                 })
         },
 

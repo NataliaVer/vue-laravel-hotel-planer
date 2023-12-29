@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Hotel\StoreHotelRequest;
 use App\Models\Photo;
 use App\Models\Language;
+use App\Events\AddedHotel;
 
 class StoreHotelController extends Controller
 {
@@ -20,32 +21,15 @@ class StoreHotelController extends Controller
         $lang_code = $request->post('lang_code');
 
         $data = $request->validated();
-        $exclude_el = ['number_house', 'phone', 'time_of_settlement', 'time_of_eviction', 'lang_code', 'baground_photo', 'all_photos'];
-
-        // return $data;
+        // $exclude_el = ['number_house', 'phone', 'time_of_settlement', 'time_of_eviction', 'lang_code', 'baground_photo', 'all_photos'];
 
         $hotel = $user->hotel()->create($data);
         $hotel->fresh();
 
         $translate = $hotel->translations()->create($data);
 
-        // return $translate;
 
-        $languages = Language::all();
-
-
-        foreach($languages as $lang) {
-            if($lang->code != $lang_code) {
-                $data['lang_code'] = $lang->code;
-                foreach($data as $key => $el){
-                    if(!in_array($key, $exclude_el)) {
-                        $result = GoogleTranslate::trans($el, $lang->code=='ua'?'uk':$lang->code, $lang_code);
-                        $data[$key] = $result;
-                    }
-                }
-                $translate = $hotel->translations()->create($data);
-            }
-        }
+        event(new AddedHotel($translate));
 
         if($request->hasFile('baground_photo')) {
 

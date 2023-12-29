@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
     // Route::get('/getUser', [App\Http\Controllers\Auth\LoginController::class, 'getUser']);
 });
+Route::get('/authenticated', [App\Http\Controllers\Auth\UserController::class, 'authenticated']);
 // Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
 Route::get('/isGuest', [App\Http\Controllers\Auth\UserController::class, 'isGuest']);
 Route::get('/getUser', [App\Http\Controllers\Auth\UserController::class, 'index'])->middleware('auth');

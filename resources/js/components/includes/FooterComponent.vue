@@ -22,9 +22,9 @@
         <form>
           <h5>{{ $t('TestProject') }}</h5>
           <p>{{ $t('FoterText') }}</p>
-          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+          <!-- <div class="d-flex flex-column flex-sm-row w-100 gap-2">
             <a href="#" class="nav-link px-2 text-muted">API</a>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>

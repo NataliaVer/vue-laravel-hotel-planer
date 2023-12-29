@@ -81,7 +81,7 @@ export default {
 
     mounted() {
         this.getHotel();
-        console.log(this.hotel);
+        // console.log(this.hotel);
     },
 
     methods: {
@@ -123,7 +123,6 @@ export default {
             axios.post(`/api/hotelUpdate/${this.hotel.id}`, newHotelData)
                 .then(res => {
                     this.change = false;
-                    console.log(res);
                     this.getHotel();
                 })
                 .catch(err => {
@@ -149,7 +148,11 @@ export default {
                             this.getHotel();
                         })
                         .catch(err => {
-                            this.errors = err.response.data.errors;
+                            this.$parent.$parent.$swal({
+                                icon: "error",
+                                title: "Oops...",
+                                text: err.response.data.message,
+                            });
                             console.log(err);
                         })
                 } else {
@@ -188,20 +191,6 @@ export default {
 
             this.errors = null;
             this.$refs.form.createHotel();
-            // const newHotelData = this.createDataHotel();
-
-            // console.log(newHotelData);
-
-            // axios.post('api/hotel/create', newHotelData)
-            //     .then(res => {
-            //         console.log(res);
-            //         // console.log(newHotelData);
-            //         this.getHotel();
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //         this.errors = err.response.data.errors;
-            //     })
         },
         addBagroundPhoto(e) {
             let files = this.$refs.baground_photo.files;

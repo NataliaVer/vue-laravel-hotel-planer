@@ -37,8 +37,8 @@
                                 <td class="text-nowrap align-middle">{{ $t('CountBed') }}</td>
                                 <td class="text-nowrap align-middle">
                                     <div class="row g-2">
-                                        <input type="text" v-model="count_one_bed" class="form-control" placeholder="single bed">
-                                        <input type="text" v-model="count_two_bed" class="form-control" placeholder="double bed">
+                                        <input type="text" v-model="count_bed" class="form-control" placeholder="count bed">
+                                        <input type="text" v-model="count_seats_in_bed" class="form-control" placeholder="count seats in bed">
                                     </div>
                                 </td>
                             </tr>
@@ -86,7 +86,7 @@
 
 <script>
 import axios from 'axios';
-
+import { getActiveLanguage } from 'laravel-vue-i18n';
 
 export default {
     name: "AddRoomsComponent",
@@ -98,8 +98,8 @@ export default {
             price: null,
             description: null,
             amenities: null,
-            count_one_bed: '',
-            count_two_bed: '',
+            count_bed: '',
+            count_seats_in_bed: '',
             count_rooms: null,
             room_photos: null,
         }
@@ -112,12 +112,13 @@ export default {
         createDataRoom() {
 
             const newRoomData = new FormData();
+            newRoomData.append('lang_code', getActiveLanguage());
             newRoomData.append('name', this.name);
             newRoomData.append('price', this.price);
             newRoomData.append('description', this.description);
             newRoomData.append('amenities', this.amenities);
-            newRoomData.append('count_one_bed', this.count_one_bed);
-            newRoomData.append('count_two_bed', this.count_two_bed);
+            newRoomData.append('count_bed', this.count_bed);
+            newRoomData.append('count_seats_in_bed', this.count_seats_in_bed);
             newRoomData.append('count_rooms', this.count_rooms);
             if (this.room_photos) {
                 for (let i = 0; i < this.room_photos.length; i++) {

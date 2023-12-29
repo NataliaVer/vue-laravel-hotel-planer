@@ -33,6 +33,7 @@ class UpdateHotelRequest extends FormRequest
             'description' => 'required',
             'time_of_settlement' => 'required',
             'time_of_eviction' => 'required',
+            'lang_code' => 'required',
             // 'baground_photo' => '',
             // 'all_photos' => ''
             ];

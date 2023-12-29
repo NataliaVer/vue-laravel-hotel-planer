@@ -8,8 +8,9 @@
     </div>
     <template v-if="hasRooms">
         <div class="text-center">
-        <router-link to="add_reservation"><button type="button" class="btn btn-primary mb-3">{{ $t('AddReservationButton') }}</button></router-link>
-    </div>
+            <router-link to="add_reservation"><button type="button" class="btn btn-primary mb-3">{{
+                $t('AddReservationButton') }}</button></router-link>
+        </div>
     </template>
     <template v-else>
         <p class="text-danger text-center">{{ $t('YouNeedCreateRooms') }}</p>
@@ -31,16 +32,22 @@
                     <p class="card-text">{{ 'E-mail: ' + booking.email }}</p>
                     <p class="card-text">{{ 'Тел.: ' + booking.phone }}</p>
                     <template v-if="booking.confirmed">
-                        <button class="btn btn-secondary" @click="confirmBooking(booking.id, 0)">{{ $t('CancelBooking') }}</button>
+                        <button class="btn btn-secondary" @click="confirmBooking(booking.id, 0)">{{ $t('CancelBooking')
+                        }}</button>
                     </template><template v-else>
-                        <button class="btn btn-primary" @click="confirmBooking(booking.id, 1)">{{ $t('ConfirmBooking') }}</button>
+                        <button class="btn btn-primary" @click="confirmBooking(booking.id, 1)">{{ $t('ConfirmBooking')
+                        }}</button>
                     </template>
-                    <button class="btn btn-danger mx-2" @click="deleteBooking(booking.id)" style="float: right;">{{ $t('Delete') }}</button>
-                    <button v-if="isEdit != booking.id" class="btn btn-info" @click="changeBooking(booking)" style="float: right;">{{ $t('Change') }}</button>
-                    <button v-if="isEdit == booking.id" class="btn btn-secondary" @click="cancelEdit" style="float: right;" >{{ $t('Cancel') }}</button>
+                    <button class="btn btn-danger mx-2" @click="deleteBooking(booking.id)" style="float: right;">{{
+                        $t('Delete') }}</button>
+                    <button v-if="isEdit != booking.id" class="btn btn-info" @click="changeBooking(booking)"
+                        style="float: right;">{{ $t('Change') }}</button>
+                    <button v-if="isEdit == booking.id" class="btn btn-secondary" @click="cancelEdit"
+                        style="float: right;">{{ $t('Cancel') }}</button>
                 </div>
             </div>
-            <UpdateBookedRoomComponent :booking="booking" :options="options" :ref="`editBooking_${booking.id}`"></UpdateBookedRoomComponent>
+            <UpdateBookedRoomComponent :booking="booking" :options="options" :ref="`editBooking_${booking.id}`">
+            </UpdateBookedRoomComponent>
         </template>
     </template>
 </template>
@@ -84,10 +91,10 @@ export default {
 
         doYouHaveRooms() {
             axios.get('/api/ThisUserHasRooms')
-            .then(res => {
-                this.hasRooms = res.data.length;
-                console.log(res.data.length);
-            })
+                .then(res => {
+                    this.hasRooms = res.data.length;
+                    console.log(res.data.length);
+                })
         },
 
         getBockedRooms() {
@@ -107,18 +114,18 @@ export default {
                 confirmButtonText: this.$t('Yes'),
                 cancelButtonText: this.$t('No'),
             })
-            .then((result) => {
-                if (result.isConfirmed){
-                    axios.get(`/api/confirmBooking/${id}/${action}`)
-                    .then(res => {
-                        console.log(res.data);
-                        this.getBockedRooms();
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-                }
-            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        axios.get(`/api/confirmBooking/${id}/${action}`)
+                            .then(res => {
+                                console.log(res.data);
+                                this.getBockedRooms();
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    }
+                })
         },
 
         changeBooking(booking) {
@@ -146,35 +153,42 @@ export default {
                 confirmButtonText: this.$t('Delete'),
                 cancelButtonText: this.$t('No'),
             })
-            .then(result => {
-                if (result.isConfirmed) {
-                    axios.delete(`/api/bookingRoom/${id}`)
-                    .then(res => {
-                        console.log(res.data);
-                        this.getBockedRooms();
-                        this.isEdit = null;
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-                }
-            })
+                .then(result => {
+                    if (result.isConfirmed) {
+                        axios.delete(`/api/bookingRoom/${id}`)
+                            .then(res => {
+                                if (!res.data.status) {
+                                    this.$swal(
+                                        this.$t('Error'),
+                                        this.$t(res.data.message),
+                                        'error'
+                                    );
+                                } else {
+                                    this.getBockedRooms();
+                                }
+                                this.isEdit = null;
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    }
+                })
         },
 
         getAvialableRooms(id, dateFrom, dateTo) {
             let arrayOptions = [];
             axios.get(`/api/listAvialableRooms/${id}/${dateFrom}/${dateTo}`)
-            .then(res => {
-                this.options = res.data;
-                for(let option of res.data){
-                    arrayOptions.push(option);
-                }
-                this.options = arrayOptions;
-            })
-            .catch(err => {
-                console.log(err);
-                this.options = null;
-            })
+                .then(res => {
+                    this.options = res.data;
+                    for (let option of res.data) {
+                        arrayOptions.push(option);
+                    }
+                    this.options = arrayOptions;
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.options = null;
+                })
         },
 
         cancelEdit() {

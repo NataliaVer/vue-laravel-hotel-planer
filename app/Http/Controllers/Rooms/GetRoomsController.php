@@ -15,6 +15,10 @@ class GetRoomsController extends Controller
             $rooms = $user->rooms;
             $photos = $user->photos;
 
+            foreach($rooms as $room) {
+                $room['translations'] = $room->translations;
+            }
+
             return [
                 'hotel'=>$hotel,
                 'rooms'=>$rooms,

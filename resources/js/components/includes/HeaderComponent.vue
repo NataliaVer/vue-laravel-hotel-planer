@@ -52,8 +52,6 @@ export default {
   },
 
   mounted() {
-      this.$store.dispatch('getIsGuest');
-      // this.$store.dispatch('getLang',{lang: this.language});
       this.getListOfLanguage();
     },
 
@@ -61,14 +59,13 @@ export default {
     switchLanguageTo(language) {
       this.language = language;
       loadLanguageAsync(this.language);
-      console.log('switch language');
-      // this.$store.dispatch('getLang',{lang: language});
     },
     Logout() {
       axios.post('/logout')
       .then(res => {
-        this.$router.push({name: 'signin'});
+        localStorage.setItem('guest', 1);
         this.$store.dispatch('getIsGuest');
+        this.$router.push({name: 'signin'});
       })
     },
 
@@ -93,9 +90,6 @@ export default {
       guest() {
             return this.$store.getters.guest;
         },
-        // lang() {
-        //     return this.$store.getters.lang;
-        // }
     },
     
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Hotel;
-use App\Models\HotelTranslations;
+use App\Models\HotelTranslation;
 use App\Models\Language;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +18,7 @@ class SearchController extends Controller
         $lang = $req->get('lang');
         // $lang = Language::select('id')->where('code', 'like', $lang)->first();
 
-        $hotels = HotelTranslations::select('city', 'settlement')->where('lang_code', $lang)
+        $hotels = HotelTranslation::select('city', 'settlement')->where('lang_code', $lang)
                                     ->where(function ($query) use($city){
                                         $query->where('city','like', $city.'%')
                                               ->OrWhere('settlement', 'like', $city.'%');

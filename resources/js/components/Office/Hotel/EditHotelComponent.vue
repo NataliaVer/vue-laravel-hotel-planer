@@ -72,35 +72,25 @@
     <tr>
         <td class="text-nowrap align-middle">{{ $t('PhotoOfHotel') }}</td>
         <td class="text-nowrap align-middle">
-            <template>
-                <input class="form-control" type="file" ref="all_photos" @change="addAllPhoto"
-                    accept=".jpg, .jpeg, .png, .gif, .bmp" multiple />
-            </template>
+            <input class="form-control" type="file" ref="all_photos" @change="addAllPhoto"
+                accept=".jpg, .jpeg, .png, .gif, .bmp" multiple />
         </td>
     </tr>
     <tr>
         <td class="text-center align-middle">
             <div class="align-top">
-                <button class="btn btn-primary m-2" @click="this.$parent.changeHotel()">{{ $t('Send') }}</button>
+                <button class="btn btn-primary m-2" @click="this.changeHotel()">{{ $t('Send') }}</button>
             </div>
         </td>
         <td class="text-center align-middle">
             <button class="btn btn-secondary m-2" @click="this.$parent.setTheChange()">{{ $t('Close') }}</button>
         </td>
     </tr>
-
-    <!-- <template v-if="errors">
-        <div class="alert alert-danger">
-            <ul>
-                <template v-for="error in errors">
-                    <li>{{ error }}</li>
-                </template>
-            </ul>
-        </div>
-    </template> -->
 </template>
 
 <script>
+import { getActiveLanguage } from 'laravel-vue-i18n';
+
 export default {
     name: "EditHotelComponent",
 
@@ -125,5 +115,70 @@ export default {
             all_photos: null,
         }
     },
+
+    methods: {
+        createDataHotel() {
+
+            const newHotelData = new FormData();
+            newHotelData.append('lang_code', getActiveLanguage());
+            newHotelData.append('hotel_name', this.hotel_name);
+            newHotelData.append('country', this.country);
+            newHotelData.append('city', this.city);
+            newHotelData.append('settlement', this.settlement);
+            newHotelData.append('street', this.street);
+            newHotelData.append('number_house', this.number_house);
+            newHotelData.append('phone', this.phone);
+            newHotelData.append('aditional_services', this.aditional_services);
+            newHotelData.append('description', this.description);
+            newHotelData.append('time_of_settlement', this.time_of_settlement);
+            newHotelData.append('time_of_eviction', this.time_of_eviction);
+            newHotelData.append('baground_photo', this.baground_photo);
+            if (this.all_photos) {
+                for (let i = 0; i < this.all_photos.length; i++) {
+                    newHotelData.append('all_photos[' + i + ']', this.all_photos[i]);
+                };
+            } else {
+                newHotelData.append('all_photos', null);
+            }
+
+            return newHotelData;
+        },
+
+        changeHotel() {
+
+            this.$parent.errors = null;
+            const newHotelData = this.createDataHotel();
+
+            axios.post(`/api/hotelUpdate/${this.translate.hotel_id}`, newHotelData)
+                .then(res => {
+                    this.$parent.change = false;
+                    console.log(res);
+                    this.$parent.getHotel();
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$parent.errors = err.response.data.errors;
+                })
+        },
+
+        addBagroundPhoto(e) {
+            let files = this.$refs.baground_photo.files;
+
+            if (!files || !files.length)
+                return;
+
+            this.baground_photo = files[0];
+            console.log(this.baground_photo);
+        },
+
+        addAllPhoto(ev) {
+            let files = this.$refs.all_photos.files;
+
+            if (!files || !files.length)
+                return;
+
+            this.all_photos = files;
+        },
+    }
 }
 </script>

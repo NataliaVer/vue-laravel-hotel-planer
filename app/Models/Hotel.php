@@ -25,10 +25,10 @@ class Hotel extends Model
     }
 
     public function translations() {
-        return $this->hasMany(HotelTranslations::class, 'hotel_id', 'id');
+        return $this->hasMany(HotelTranslation::class, 'hotel_id', 'id');
     }
 
-    public function translate($langId) {
-        return $this->translations()->where('language_id', $langId)->first();
+    public function translate($lang) {
+        return $this->translations()->where('lang_code', $lang)->first();
     }
 }

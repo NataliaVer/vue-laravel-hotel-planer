@@ -117,5 +117,11 @@
     "These credentials do not match our records.": "Облікові дані не збігаються",
     "DoYouWantToDeleteYourHotel": "Ви дійсно хочете видалити ваш готель?",
     "Hotel was deleted success": "Готель успішно видалено",
-    "It is not possible to remove the hotel, it has a reservation": "Видалити готель неможливо, в ньому є бронювання"
+    "It is not possible to remove the hotel, it has a reservation": "Видалити готель неможливо, в ньому є бронювання",
+    "The room was deleted successfully": "Кімнату успішно видалено",
+    "It is not possible to delete the room, it has a reservation": "Неможливо видалити кімнату, для неї створено бронювання",
+    "Sent": "Зберегти",
+    "DoYouWantToDeleteThisRoom": "Ви дійсно хочете видалити цю кімнату?",
+    "You can't delete confirmed booking": "Ви не можете видалити підтверджене бронювання",
+    "The reservation has been deleted": "Бронювання видалено"
 }

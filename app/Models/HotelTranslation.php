@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HotelTranslations extends Model
+class HotelTranslation extends Model
 {
     use HasFactory;
 
@@ -13,5 +13,9 @@ class HotelTranslations extends Model
 
     public function language() {
         return $this->belongsTo(Language::class, 'lang_code', 'code');
+    }
+
+    public function hotel() {
+        return $this->belongsTo(Hotel::class, 'hotel_id', 'id');
     }
 }

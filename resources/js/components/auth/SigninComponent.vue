@@ -59,8 +59,11 @@ export default {
         password: this.password
       })
       .then(res => {
-        this.$router.push('/');
+        localStorage.setItem('guest', '');
         this.$store.dispatch('getIsGuest');
+        this.$router.push('/');
+        // this.$store.dispatch('getIsGuest');
+        // console.log(this.$store.getters.guest);
       })
       .catch(error => {
         // console.log(error.response.data.errors);

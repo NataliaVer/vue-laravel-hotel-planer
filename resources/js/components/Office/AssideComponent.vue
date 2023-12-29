@@ -9,10 +9,10 @@
     </h1>
 
     <SidebarLincComponent to="/" icon="fas fa-home">{{ $t('Home') }}</SidebarLincComponent>
-    <SidebarLincComponent v-if="!guest" to="my_profile" icon="fas fa-user">{{ $t('MyOffice') }}</SidebarLincComponent>
-    <SidebarLincComponent v-if="!guest" to="my_hotel" icon="fas fa-bookmark">{{ $t('MyHotel') }}</SidebarLincComponent>
-    <SidebarLincComponent v-if="!guest" to="my_rooms" icon="fas fa-shop">{{ $t('MyRooms') }}</SidebarLincComponent>
-    <SidebarLincComponent v-if="!guest" to="reservations" icon="fas fa-book">{{ $t('Reservations') }}</SidebarLincComponent>
+    <SidebarLincComponent v-if="!guest" to="/my_profile" icon="fas fa-user">{{ $t('MyOffice') }}</SidebarLincComponent>
+    <SidebarLincComponent v-if="!guest" to="/my_hotel" icon="fas fa-bookmark">{{ $t('MyHotel') }}</SidebarLincComponent>
+    <SidebarLincComponent v-if="!guest" to="/my_rooms" icon="fas fa-shop">{{ $t('MyRooms') }}</SidebarLincComponent>
+    <SidebarLincComponent v-if="!guest" to="/reservations" icon="fas fa-book">{{ $t('Reservations') }}</SidebarLincComponent>
 
     <span class="collapse-icon"
         :class="{ 'rotate-180': collapsed }"

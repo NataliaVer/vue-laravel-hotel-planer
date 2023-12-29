@@ -26,11 +26,12 @@ class StoreRoomRequest extends FormRequest
             'price' => 'required',
             'description' => 'required',
             'amenities' => '',
-            'count_one_bed' => '',
-            'count_two_bed' => '',
+            'count_bed' => '',
+            'count_seats_in_bed' => '',
             'count_rooms' => 'required',
             'room_photos' => 'required',
-            'hotel_id' => ''
+            'hotel_id' => '',
+            'lang_code' => '',
             ];
     }
 }

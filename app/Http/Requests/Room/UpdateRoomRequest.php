@@ -26,10 +26,11 @@ class UpdateRoomRequest extends FormRequest
             'price' => 'required',
             'description' => 'required',
             'amenities' => 'required',
-            'count_one_bed' => '',
-            'count_two_bed' => '',
+            'count_bed' => '',
+            'count_seats_in_bed' => '',
             'count_rooms' => 'required',
-            'room_photos' => ''
+            'room_photos' => '',
+            'lang_code' => '',
             ];
     }
 }

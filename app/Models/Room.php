@@ -28,7 +28,7 @@ class Room extends Model
         return $this->hasMany(RoomTranslations::class, 'room_id', 'id');
     }
 
-    public function translate($langId) {
-        return $this->translations->where('language_id', $langId)->first();
+    public function translate($lang) {
+        return $this->translations()->where('lang_code', $lang)->first();
     }
 }

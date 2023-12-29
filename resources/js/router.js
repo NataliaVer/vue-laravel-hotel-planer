@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
 import store from './store';
+import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,18 +20,6 @@ const router = createRouter({
             path: '/booking_room/:hotel_id/:id/:dateFrom/:dateTo',
             name: 'room.book',
             component: () => import('./components/hotel/BookingRoomComponent.vue'),
-            meta: { guest: true},
-        },
-        {
-            path: '/signin',
-            name: 'signin',
-            component: () => import('./components/auth/SignInComponent.vue'),
-            meta: { guest: true},
-        },
-        {
-            path: '/signup',
-            name: 'signup',
-            component: () => import('./components/auth/SignUpComponent.vue'),
             meta: { guest: true},
         },
         {
@@ -61,7 +49,7 @@ const router = createRouter({
         {
             path: '/my_rooms',
             name: 'my_rooms',
-            component: () => import('./components/Office/MyRoomsComponent.vue'),
+            component: () => import('./components/Office/Rooms/MyRoomsComponent.vue'),
             meta: { guest: false},
         },
         {
@@ -82,14 +70,36 @@ const router = createRouter({
             component: () => import('./components/Office/BookedRoom/AddBookedRoomComponent.vue'),
             meta: { guest: false},
         },
+        {
+            path: '/signin',
+            name: 'signin',
+            component: () => import('./components/auth/SignInComponent.vue'),
+            meta: { guest: true},
+        },
+        {
+            path: '/signup',
+            name: 'signup',
+            component: () => import('./components/auth/SignUpComponent.vue'),
+            meta: { guest: true},
+        },
     ]
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach(async(to, from) => {
+    
+    const guest = await store.getters.guest;
 
-    if(to.meta.guest === false && store.getters.guest === 1) {
+    if(to.meta.guest === false && guest === '1') {
         return {
             path: '/signin',
+        }
+    }
+
+    if(to.path == '/signin' || to.path == '/signup') {
+        if(guest != '1'){
+            return {
+                path: from.path,
+            }
         }
     }
 });

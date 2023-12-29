@@ -129,8 +129,8 @@ import { getActiveLanguage } from 'laravel-vue-i18n'
 export default {
     data() {
         return {
-            dateFrom: new Date().toLocaleDateString('fr-CA'),
-            dateTo: new Date(+new Date() + 86400000).toLocaleDateString('fr-CA'),
+            dateFrom: new Date(this.$route.params.dateFrom).toLocaleDateString('fr-CA'),
+            dateTo: new Date(this.$route.params.dateTo).toLocaleDateString('fr-CA'),
             subtractDate: 1,
         }
     },
@@ -173,7 +173,7 @@ export default {
         },
 
         translate() {
-            console.log(this.hotel.rooms);
+            // console.log(this.hotel.rooms);
             // this.hotel.translations.forEach(translation => {
             //     if(translation.language_id === getActiveLanguage()){
             //         console.log(translation);

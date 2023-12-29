@@ -98,7 +98,7 @@ export default {
 
     data() {
         return {
-            city: null,
+            city: localStorage.getItem('city'),
             dateFromHome: new Date().toLocaleDateString('fr-CA'),
             dateToHome: new Date(+new Date() + 86400000).toLocaleDateString('fr-CA'),
             cities: null,
@@ -112,8 +112,9 @@ export default {
     },
 
     mounted() {
-        // this.translater(2);
-        // console.log(this.translater(2));
+        if(this.city) {
+            this.searchHotels();
+        }
     },
 
     methods: {
@@ -149,6 +150,7 @@ export default {
                     if(res.data.status){
                         console.log(res.data);
                         this.hotels = res.data.hotels;
+                        localStorage.setItem('city', this.city)
                     }
                     console.log(res);
                     this.errors = res.data.message;
