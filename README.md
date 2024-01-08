@@ -1,4 +1,4 @@
-Система бронювання готелів. Проект розроблено на Laravel 10, Vue JS 3 та за допомогою Bootstrap5.
+Система бронювання готелів. Проект розроблено на Laravel 10, Vue.js 3 та за допомогою Bootstrap 5.
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/b1da629d-066c-4c7f-9191-001056a3b953)
 
