@@ -76,7 +76,7 @@
             <div class="alert alert-danger">
                 <ul>
                     <template v-for="error in errors">
-                        <li>{{ error }}</li>
+                        <li>{{ error[0] }}</li>
                     </template>
                 </ul>
             </div>
@@ -133,6 +133,7 @@ export default {
         },
 
         sentRoomData() {
+            this.errors = null;
             let newRoomData = this.createDataRoom();
             axios.post(`/api/room/create`, newRoomData)
             .then(res => {
@@ -141,6 +142,7 @@ export default {
             })
             .catch(err => {
                 console.log(err);
+                this.errors = err.response.data.errors;
             })
         },
 

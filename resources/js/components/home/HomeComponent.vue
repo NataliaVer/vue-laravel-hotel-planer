@@ -93,12 +93,13 @@
 <script>
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import { getActiveLanguage } from 'laravel-vue-i18n';
+import {valuecity} from './valuecity.js'
 
 export default {
 
     data() {
         return {
-            city: localStorage.getItem('city'),
+            city: valuecity,
             dateFromHome: new Date().toLocaleDateString('fr-CA'),
             dateToHome: new Date(+new Date() + 86400000).toLocaleDateString('fr-CA'),
             cities: null,
@@ -148,11 +149,11 @@ export default {
             axios.post('/api/searchHotels', {nameCity: this.city, dateFrom: this.dateFromHome, dateTo: this.dateToHome, lang: getActiveLanguage()})
                 .then(res => {
                     if(res.data.status){
-                        console.log(res.data);
+                        // console.log(res.data);
                         this.hotels = res.data.hotels;
                         localStorage.setItem('city', this.city)
                     }
-                    console.log(res);
+                    // console.log(res);
                     this.errors = res.data.message;
                     // console.log(res);
                 })

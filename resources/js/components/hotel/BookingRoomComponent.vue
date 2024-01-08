@@ -56,7 +56,7 @@
         </div>
         <template v-if="errors">
             <div class="alert alert-danger my-3">
-                <p>{{ errors }}</p>
+                <p v-for="error in errors">{{ $t(error[0]) }}</p>
             </div>
         </template>
         <div class="container text-center my-3">
@@ -106,7 +106,8 @@ export default {
                 this.$router.push(`/hotel/${this.$route.params.hotel_id}/${this.$route.params.dateFrom}/${this.$route.params.dateTo}`);
             })
             .catch(error => {
-                this.errors = error.response.data.message;
+                // console.log(error);
+                this.errors = error.response.data.errors;
             })
         },
 

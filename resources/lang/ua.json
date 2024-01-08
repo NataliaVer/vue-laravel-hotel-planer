@@ -123,5 +123,11 @@
     "Sent": "Зберегти",
     "DoYouWantToDeleteThisRoom": "Ви дійсно хочете видалити цю кімнату?",
     "You can't delete confirmed booking": "Ви не можете видалити підтверджене бронювання",
-    "The reservation has been deleted": "Бронювання видалено"
+    "The reservation has been deleted": "Бронювання видалено",
+    "The first name field is required.": "Поле імені є обов’язковим для заповнення.",
+    "The last name field is required.": "Поле прізвища є обов’язковим для заповнення.",
+    "The phone field is required.": "Поле телефону є обов’язковим для заповнення.",
+    "The phone field must be at least 10 characters.": "Поле телефону має містити не менше 10 символів.",
+    "The phone field must not be greater than 14 characters.": "Поле телефону не повинно перевищувати 14 символів.",
+    "The room id field is required.": "Поле кімнати обов’язкове."
 }

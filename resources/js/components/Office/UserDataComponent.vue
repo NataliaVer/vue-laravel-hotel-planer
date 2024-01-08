@@ -1,6 +1,6 @@
 <template>
   <template v-if="user">
-    <div>
+    <div class="container">
       <h6 class="mt-3 text-center">{{ $t('Hello') }}, {{ user.name }}! {{ $t('OfficeDescription') }}.</h6>
 
       <div class="table-responsive table-lg mt-3">
@@ -40,7 +40,7 @@
         </template>
 
       </div>
-      <div class="text-center">
+      <div class="text-center mb-5">
       <button v-if="!change" type="button" class="btn btn-primary m-2" @click="changeData(true)">{{ $t('ChangeData')
       }}</button>
       <button v-if="!change" type="button" class="btn btn-info" @click="changePassword()">{{ $t('ChangePass') }}</button>

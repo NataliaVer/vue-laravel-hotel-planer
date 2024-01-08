@@ -58,6 +58,7 @@ class SearchController extends Controller
         //We get min price of rooms, at first we get hotels with condition,
         //becouse we need not all rooms, if it will be match, we get slow query
         $all_hotels_id = DB::table('hotel_translations')->where('city','like', $city.'%')
+                                            ->Orwhere('settlement','like', $city.'%')
                                             ->leftJoin('rooms', function ($join) {
                                                     $join->on('hotel_translations.hotel_id', '=', 'rooms.hotel_id');
                                                 })

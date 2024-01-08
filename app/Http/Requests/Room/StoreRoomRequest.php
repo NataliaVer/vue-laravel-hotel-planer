@@ -23,12 +23,12 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'name' => 'required|max:150',
-            'price' => 'required',
+            'price' => 'required|integer',
             'description' => 'required',
             'amenities' => '',
-            'count_bed' => '',
-            'count_seats_in_bed' => '',
-            'count_rooms' => 'required',
+            'count_bed' => 'required|integer',
+            'count_seats_in_bed' => 'required|integer',
+            'count_rooms' => 'required|integer',
             'room_photos' => 'required',
             'hotel_id' => '',
             'lang_code' => '',

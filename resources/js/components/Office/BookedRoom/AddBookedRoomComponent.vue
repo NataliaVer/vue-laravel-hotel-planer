@@ -1,22 +1,26 @@
 <template>
     <div class="mb-3 mx-3">
-        <h5 class="header text-center mt-3">{{$t('AddReservationTextComponent')}}</h5>
+        <h5 class="header text-center mt-3">{{ $t('AddReservationTextComponent') }}</h5>
         <div class="body">
             <div class="form-group">
-                <label for="dateFrom">{{$t('dateFrom')}}</label>
+                <label for="dateFrom">{{ $t('dateFrom') }}</label>
                 <input type="date" id="dateFrom" v-model="date_from" class="form-control">
             </div>
             <div class="form-group">
-                <label for="dateTo">{{$t('dateTo')}}</label>
+                <label for="dateTo">{{ $t('dateTo') }}</label>
                 <input type="date" id="dateTo" v-model="date_to" class="form-control">
             </div>
             <div class="form-group">
                 <label for="UserRoomList">{{ $t('Room') }}</label>
                 <select class="form-control" id="UserRoomList" v-model="room">
                     <template v-if="options">
-                        <option v-for="option in options" :value="option.id">
-                            {{ option.name }}
-                        </option>
+                        <template v-for="option in options">
+                            <template v-for="translation in option.translations">
+                                <option v-if="activeLang() === translation.lang_code" :value="option.id">
+                                    {{ translation.name }}
+                                </option>
+                            </template>
+                        </template>
                     </template>
                 </select>
             </div>
@@ -43,18 +47,24 @@
                 <input type="checkbox" v-model="confirmed" id="confirmed">
             </div>
 
-            <div v-if="errors" class="alert alert-danger"></div>
+            <template v-if="errors">
+                <div class="alert alert-danger my-3">
+                    <p v-for="error in errors">{{ $t(error[0]) }}</p>
+                </div>
+            </template>
 
             <div>
                 <button class="btn btn-primary mx-2" @click="sentData()">{{ $t('AddReservationButton') }}</button>
                 <router-link to="/reservations"><button class="btn btn-secondary">{{ $t('Cancel') }}</button></router-link>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { getActiveLanguage } from 'laravel-vue-i18n';
 
 export default {
     name: "AddBookedRoomComponent",
@@ -86,6 +96,7 @@ export default {
         },
 
         sentData() {
+            this.errors = null;
             axios.post(`/api/storeBookingRoom`, {
                 date_from: this.date_from,
                 date_to: this.date_to,
@@ -96,14 +107,15 @@ export default {
                 phone: this.phone,
                 confirmed: this.confirmed ? '1' : '0',
             })
-            .then(res => {
-                console.log(res);
-                // this.$parent.getBockedRooms();
-                this.$router.push('reservations');
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                .then(res => {
+                    // console.log(res);
+                    // this.$parent.getBockedRooms();
+                    this.$router.push('reservations');
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.errors = err.response.data.errors;
+                })
         },
 
         getAvialableRooms(date_from, date_to) {
@@ -111,26 +123,27 @@ export default {
             // const date_to = new Date(this.date_to).toLocaleDateString('fr-CA');
             let arrayOptions = [];
             axios.get(`/api/listAvialableRooms/empty/${date_from}/${date_to}`)
-            .then(res => {
-                console.log(res.data);
-                this.options = res.data;
-                // console.log(this.options);
-                for(let option of res.data){
-                    // console.log(option);
-                    arrayOptions.push(option);
-                }
-                // console.log(arrayOptions);
-                this.options = arrayOptions;
-            })
-            .catch(err => {
-                console.log(err);
-                this.options = null;
-            })
+                .then(res => {
+                    // console.log(res.data);
+                    this.options = res.data;
+                    // console.log(this.options);
+                    for (let option of res.data) {
+                        // console.log(option);
+                        arrayOptions.push(option);
+                    }
+                    // console.log(arrayOptions);
+                    this.options = arrayOptions;
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.options = null;
+                })
         },
+        activeLang() {
+            return getActiveLanguage();
+        }
     }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

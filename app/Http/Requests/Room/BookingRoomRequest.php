@@ -22,32 +22,13 @@ class BookingRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'date_from' => 'string',
-                'date_to' => 'string',
-                'first_name' => 'string',
-                'last_name' => 'string',
-                'phone' => 'string|min:10|max:14',
-                'email' => 'string|email'
+                'date_from' => 'required',
+                'date_to' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'phone' => 'required|min:10|max:14',
+                'email' => 'required|email'
         ];
     }
 
-    /**
-    * Get the error messages for the defined validation rules.
-    *
-    * @return array<string, string>
-    */
-    public function messages(): array
-    {
-        return [
-            'date_from.string' => 'Заповніть поля дати',
-            'first_name.string' => "Укажіть ім'я",
-            'last_name.string' => 'Укажіть прізвище',
-            'phone.string' => 'Укажіть телефон',
-            'phone.min' => 'Довжина поля телефону не менше 10 символів',
-            'phone.max' => 'Довжина поля телефону не більше 14 символів',
-            'email.string' => 'Укажіть електронну ардесу',
-            'email.email' => 'Укажіть дійсну електронну ардесу',
-            'date_to.string' => 'Заповніть поля дати',
-        ];
-    }
 }

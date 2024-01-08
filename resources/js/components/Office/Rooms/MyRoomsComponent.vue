@@ -124,7 +124,7 @@
             <div class="alert alert-danger">
                 <ul>
                     <template v-for="error in errors">
-                        <li>{{ error }}</li>
+                        <li>{{ error[0] }}</li>
                     </template>
                 </ul>
             </div>
@@ -181,6 +181,7 @@ export default {
         },
 
         setTheChange(room) {
+            this.errors = null;
             if (room) {
                 this.change = room.room_id;
                 this.name = room.name;
@@ -225,6 +226,7 @@ export default {
             return newRoomData;
         },
         changeRoom(id) {
+            this.errors = null;
             let newRoomData = this.createDataRoom();
             axios.post(`/api/roomUpdate/${id}`, newRoomData)
                 .then(res => {
@@ -239,6 +241,7 @@ export default {
 
         },
         deleteRoom(id) {
+            this.errors = null;
             this.$parent.$parent.$swal({
                 title: this.$t('DoYouWantToDeleteThisRoom'),
                 icon: "warning",

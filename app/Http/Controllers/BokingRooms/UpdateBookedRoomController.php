@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Room;
 
 use  App\Http\Requests\BookedRoom\UpdateBookedRoomRequest;
 
@@ -51,18 +52,27 @@ class UpdateBookedRoomController extends Controller
 
         if (!$dateFrom || !$dateTo || !is_numeric($id) || !$newBookedRoom->validateDate($dateFrom, 'Y-m-d') || !$newBookedRoom->validateDate($dateTo, 'Y-m-d')) {
 
-            return $user->rooms;
+            $rooms = $user->rooms;
+            foreach($rooms as $room) {
+                $room['translations'] = $room->translations;
+            }
+            
+            return $rooms;
         }
 
         $rooms = $user->rooms->pluck('id')->toArray();
 
         $booked_rooms = $this->freeRoomsByDate($rooms, $id, $dateFrom, $dateTo);
 
-        $roomsAvailable = DB::table('rooms')->where('user_id','=', $user->id)
+        $roomsAvailable = Room::where('user_id','=', $user->id)
                                     ->leftJoinSub($booked_rooms, 'booked_rooms', function ($join) {
                                         $join->on('rooms.id', '=', 'booked_rooms.room_id');
                                     })
                                     ->get();
+
+        foreach($roomsAvailable as $room) {
+            $room['translations'] = $room->translations;
+        }
 
         return $roomsAvailable;
     }
@@ -70,12 +80,12 @@ class UpdateBookedRoomController extends Controller
     //від загальної кількості кімнат певного виду відняти уже заброньовані кімнати
     //без тієї що змінюємо (один запит на Add та Edit), якщо її id передано в запиті
     public function freeRoomsByDate($rooms, $id, $dateFrom, $dateTo) {
-        return  DB::table('booked_rooms')->select(DB::raw('count(*) as booked_rooms_count, room_id'))
+        return  BookedRoom::select(DB::raw('count(*) as booked_rooms_count, room_id'))
                                                 ->whereIn('room_id', $rooms)
                                                 ->where('id', "<>", ($id ? $id : ""))
-                                                //над onfirmed треба ще подумати,
+                                                //над confirmed треба ще подумати,
                                                 //як воно повинно працювати,
-                                                //можливоб це буда альтернатива "Оплачено"
+                                                //можливо б це була альтернатива "Оплачено"
                                                 // ->where('confirmed', '1')
                                                 ->where(function($query) use ($dateFrom, $dateTo) {
                                                    $query->where('date_from', '>', $dateFrom)

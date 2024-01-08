@@ -1,7 +1,7 @@
 <template>
     <AssideComponent></AssideComponent>
     <div :style="{ 'margin-left': sidebarWidth }">
-        <HeaderComponent ref="translater"></HeaderComponent>
+        <HeaderComponent></HeaderComponent>
         <router-view></router-view>
         <FooterComponent></FooterComponent>
     </div>

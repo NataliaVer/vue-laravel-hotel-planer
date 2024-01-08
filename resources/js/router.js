@@ -61,7 +61,7 @@ const router = createRouter({
         {
             path: '/reservations',
             name: 'reservations',
-            component: () => import('./components/Office/ReservationsComponent.vue'),
+            component: () => import('./components/Office/BookedRoom/ReservationsComponent.vue'),
             meta: { guest: false},
         },
         {

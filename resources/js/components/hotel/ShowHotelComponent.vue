@@ -75,9 +75,10 @@
             </div>
         </div>
 
-        <div class="container col-md-6">
+        <h4 class="my-3" style="text-align: center">{{ $t('PricesRooms') }}</h4>
+        
+        <div class="container d-flex justify-content-center">
             <template v-if="hotel.rooms">
-                <h4 class="my-3" style="text-align: center">{{ $t('PricesRooms') }}</h4>
                 <div class="room-cards" id="room-cards">
                     <template v-for="room in hotel.rooms">
                         <template v-if="room.count_rooms - room.booked_rooms_count > 0">

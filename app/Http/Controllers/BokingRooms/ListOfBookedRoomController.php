@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\BookedRoom;
+use App\Models\Room;
 
 //Seach boocked roooms on date for user office
 class ListOfBookedRoomController extends Controller
@@ -26,26 +27,33 @@ class ListOfBookedRoomController extends Controller
             // return back()->withErrors(['message' => 'Do not valide date']);
         }
 
-        $rooms = DB::table('rooms')
-                   ->select('name', 'price', 'count_one_bed', 'count_two_bed', DB::raw('id as room_id'))
-                   ->where('rooms.user_id', '=', $user->id);
+        $rooms = Room::where('rooms.user_id', '=', $user->id)
+                   ->select('name', 'price', DB::raw('id as room_id'));
 
-        $booked_rooms = DB::table('booked_rooms')->select('*')
-                                                 ->whereBetween('booked_rooms.date_from', [$dateFrom, $dateTo])
+        $booked_rooms = BookedRoom::whereBetween('booked_rooms.date_from', [$dateFrom, $dateTo])
                                                  // ->orWhere('created_at', '<=', $dateTo)
                                                  ->JoinSub($rooms, 'rooms', function ($join) {
                                                      $join->on('booked_rooms.room_id', '=', 'rooms.room_id');
                                                  })->get();
 
+        foreach($booked_rooms as $booked_room) {
+            $booked_room['translations'] = $booked_room->room->translations;
+        }
+                                                 
         return $booked_rooms;
     }
 
-    //check if this user have rooms in hotel
+    //will need to check if this user have rooms in hotel
     //before create reservations
     public function UsersRooms() {
 
         $user = Auth::user();
+        $rooms = $user->rooms;
 
-        return $user->rooms;
+        foreach($rooms as $room) {
+            $room['translations'] = $room->translations;
+        }
+
+        return $rooms;
     }
 }

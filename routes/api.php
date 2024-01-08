@@ -21,6 +21,7 @@ use App\Http\Controllers\Hotels\HotelController;
 // });
 
 Route::get('/searchCity', [App\Http\Controllers\SearchController::class, 'searchCity']);
+Route::get('/translateCity/{lang}/{city}', [App\Http\Controllers\Languages\LanguageController::class, 'translateCity']);
 
 Route::post('/searchHotels', [App\Http\Controllers\SearchController::class, 'searchHotels']);
 

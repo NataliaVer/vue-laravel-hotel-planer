@@ -39,6 +39,7 @@
 <script>
 import axios from 'axios';
 import { loadLanguageAsync, getActiveLanguage } from 'laravel-vue-i18n';
+import {setCity} from '../home/valuecity.js';
 
 export default {
 
@@ -59,13 +60,15 @@ export default {
     switchLanguageTo(language) {
       this.language = language;
       loadLanguageAsync(this.language);
+      this.translateCity(localStorage.getItem('city'));
     },
     Logout() {
       axios.post('/logout')
       .then(res => {
         localStorage.setItem('guest', 1);
         this.$store.dispatch('getIsGuest');
-        this.$router.push({name: 'signin'});
+        this.$router.go('/signin');
+        
       })
     },
 
@@ -81,8 +84,13 @@ export default {
       return lang == 'en' ? 'US' : lang.toUpperCase();
     },
 
-    translater() {
-      console.log('translate');
+    translateCity(city) {
+      if (city) {
+        axios.get(`/api/translateCity/${this.language}/${city}`)
+        .then(res => {
+          setCity(res.data);
+        })
+      }
     },
   },
 

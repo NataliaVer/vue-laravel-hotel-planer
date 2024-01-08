@@ -40,7 +40,7 @@
             <div class="alert alert-danger">
                 <ul>
                     <template v-for="error in errors">
-                        <li>{{ error }}</li>
+                        <li>{{ error[0] }}</li>
                     </template>
                 </ul>
             </div>
@@ -112,6 +112,7 @@ export default {
         },
 
         setTheChange(change) {
+            this.errors = null;
             this.change = change;
         },
 
