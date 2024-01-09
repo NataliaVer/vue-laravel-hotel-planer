@@ -1,35 +1,36 @@
-Система бронювання готелів. Проект розроблено на Laravel 10, Vue.js 3 та за допомогою Bootstrap 5.
+Hotel reservation system. The project is developed on Laravel 10, Vue.js 3 and using Bootstrap 5.
+For translation use - https://github.com/Stichoza/google-translate-php and laravel-vue-i18n
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/b1da629d-066c-4c7f-9191-001056a3b953)
 
-Для резервування готелів розроблено меню вибору дат бронювання та міста (список міст вибирається з бази даних зареєстрованих готелів). Клікабельний заголовок картки готелю відкриває сторінку з описом, та можливістю забронювати потрібну кімнату, перед бронюванням є можливість змінити дату
+A menu for selecting reservation dates and cities has been developed for hotel reservations (the list of cities is selected from the database of registered hotels). The clickable title of the hotel card opens a page with a description and the possibility to book the desired room, before booking it is possible to change the date
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/caaf6176-f672-4020-9c22-28becf0a54e0)
 
-Після натискання кнопки "Зарезервувати" система запропонує ввести особисті дані і після підтвердження вони додадутся в базу даних
+After clicking the "Reserve" button, the system will prompt you to enter your personal data, and after confirmation, they will be added to the database,
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/7794c606-c811-4b89-aa37-4771b0126d0e)
 
-про що і сповістить система.
+and the system will notify you.
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/6d891f1a-cb52-4f87-a9f4-62df0b81a3c1)
 
-Також є можливість зареєструватися в системі (або увійти у свій кабінет) та додати власний готель
+It is also possible to register in the system (or log in to your account) and add your own hotel
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/c49a8258-2f3a-4bfb-964a-7fcf70c4e7ad)
 
-Бічна панель  допоможе в роботі з особистим кабінетом користувача 
+The side panel will help you work with the user's personal account
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/bcc7a9dc-d950-4ad3-9bc8-aa10c6ec9282)
 
-Тут є можливість додати готель, кімнати та їх опис
+Here it is possible to add a hotel, rooms and their description
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/84148b3a-7dbe-481f-9110-7041bb058880)
 
-Також є можливість в особистому кабінеті додавати, видаляти та редагувати бронювання (функція підтвердження створена для можливості вказати чи була передплата при бронюванні номерів)
+It is also possible to add, delete and edit reservations in the personal account (the confirmation function is designed to indicate whether there was a prepayment when booking rooms)
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/1bbee079-06d4-4f0a-aaf0-efafd636d7fa)
 
-Також додано можливість зміни мови в додатку, коли користувач вносить дані (створює готель або кімнати), автоматична функція перекладу створює додатковий запис в базі даних з перекладом тексту внесеного користувачем
+Also added the ability to change the language in the application when the user enters data (creates a hotel or rooms), the automatic translation function creates an additional record in the database with the translation of the text entered by the user
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/23987aef-6328-4952-bac0-5a09ba4aa8c7)
 
