@@ -43,8 +43,6 @@ import {setCity} from '../home/valuecity.js';
 
 export default {
 
-  // props: ['user'],
-
   data() {
     return {
       language: getActiveLanguage(),

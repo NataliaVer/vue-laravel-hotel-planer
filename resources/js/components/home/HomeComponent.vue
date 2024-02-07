@@ -8,7 +8,7 @@
         <template class="row">
             <div class="row wrapper">
                 <div class="form-group col-md-4 my-2">
-                    <input type="text" class="form-control" v-model="city" @input="searchCity()" list="CityList"
+                    <input type="search" class="form-control" v-model="city" @input="searchCity()" @change="clearCity()" list="CityList"
                         autocomplete="off" :placeholder="$t('CityOrSettlement')">
                     <datalist id="CityList">
                         <template v-if="cities">
@@ -184,6 +184,12 @@ export default {
 
          translate(name) {
                 return `${name}_${getActiveLanguage()}`
+            },
+
+            clearCity() {
+                if(this.city === '') {
+                    localStorage.removeItem('city');
+                }
             },
     },
 

@@ -98,7 +98,6 @@ export default {
         phone: this.phone
       })
         .then(res => {
-          console.log(res.data);
           this.change = false;
           this.getUser();
           this.$parent.$parent.YourDataHasBeenReset();

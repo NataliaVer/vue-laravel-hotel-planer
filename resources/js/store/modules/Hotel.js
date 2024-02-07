@@ -1,3 +1,5 @@
+import router from "../../router";
+
 const state = {
     hotel: null
 }
@@ -13,6 +15,8 @@ const actions = {
         axios.get(`/api/hotel/${param.id}/${param.dateFrom}/${param.dateTo}`)
             .then(data => {
                 commit('setHotel', data.data)
+            }).catch(error => {
+                router.push({name: 'NotFound'});
             })
     },
 }

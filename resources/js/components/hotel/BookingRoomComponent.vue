@@ -37,28 +37,32 @@
             <div class="form-group">
                 <label for="first_name">{{ $t('FirstName') }}</label>
                 <input type="name" name="first_name" class="form-control" v-model="first_name" id="first_name">
+                <p class="text-danger" v-if="errors && errors.first_name">{{ $t(errors.first_name[0]) }}</p>
             </div>
             <div class="form-group">
                 <label for="last_name">{{ $t('LastName') }}</label>
                 <input type="name" name="last_name" class="form-control" v-model="last_name" id="last_name">
+                <p class="text-danger" v-if="errors && errors.last_name">{{ $t(errors.last_name[0]) }}</p>
             </div>
 
             <div class="form-group">
                 <label for="email">{{ $t('Email') }}</label>
                 <input type="email" name="email" class="form-control" v-model="email" id="email">
+                <p class="text-danger" v-if="errors && errors.email">{{ $t(errors.email[0]) }}</p>
             </div>
 
             <div class="form-group">
                 <label for="phone">{{ $t('Phone') }}</label>
                 <input type="phone" name="phone" class="form-control" v-model="phone" id="phone">
+                <p class="text-danger" v-if="errors && errors.phone">{{ $t(errors.phone[0]) }}</p>
             </div>
 
         </div>
-        <template v-if="errors">
+        <!-- <template v-if="errors">
             <div class="alert alert-danger my-3">
                 <p v-for="error in errors">{{ $t(error[0]) }}</p>
             </div>
-        </template>
+        </template> -->
         <div class="container text-center my-3">
             <button type="button" @click.prevent="bookingRoom()" class="btn btn-primary">{{ $t('Reserve') }}</button>
         </div>
@@ -82,8 +86,12 @@ export default {
         }
     },
 
-    mounted() {
-        this.$store.dispatch('getHotel', { id: this.$route.params.hotel_id, dateFrom: this.$route.params.dateFrom, dateTo: this.$route.params.dateTo });
+    beforeCreate() {
+        this.$store.dispatch('getHotel', {
+            id: this.$route.params.hotel_id,
+            dateFrom: this.$route.params.dateFrom,
+            dateTo: this.$route.params.dateTo
+        });
     },
 
     methods: {
@@ -106,7 +114,6 @@ export default {
                 this.$router.push(`/hotel/${this.$route.params.hotel_id}/${this.$route.params.dateFrom}/${this.$route.params.dateTo}`);
             })
             .catch(error => {
-                // console.log(error);
                 this.errors = error.response.data.errors;
             })
         },

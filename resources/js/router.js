@@ -82,6 +82,11 @@ const router = createRouter({
             component: () => import('./components/auth/SignUpComponent.vue'),
             meta: { guest: true},
         },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'NotFound',
+            component: () => import('./components/NotFound.vue')
+        },
     ]
 })
 

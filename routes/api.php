@@ -16,10 +16,6 @@ use App\Http\Controllers\Hotels\HotelController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::get('/searchCity', [App\Http\Controllers\SearchController::class, 'searchCity']);
 Route::get('/translateCity/{lang}/{city}', [App\Http\Controllers\Languages\LanguageController::class, 'translateCity']);
 
@@ -30,17 +26,15 @@ Route::get('/hotel/{hotel}/{dateFrom}/{dateTo}', [HotelController::class, 'show'
 Route::post('/bookingroom', [App\Http\Controllers\BookingRoomController::class, 'bookRoom']);
 
 Route::group(['middleware' => ['auth']], function () {
-    // Route::post('/signin/login', [App\Http\Controllers\Auth\LoginController::class,'login'])->name('signin.login');
-    Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
-    // Route::get('/getUser', [App\Http\Controllers\Auth\LoginController::class, 'getUser']);
+    Route::get('/getUser', [App\Http\Controllers\Auth\UserController::class, 'index']);
+    Route::put('/updateUser',[App\Http\Controllers\Auth\ChangeUserDataController::class, 'index']);
+
 });
 Route::get('/authenticated', [App\Http\Controllers\Auth\UserController::class, 'authenticated']);
-// Route::get('/get', [App\Http\Controllers\GetController::class, 'index']);
 Route::get('/isGuest', [App\Http\Controllers\Auth\UserController::class, 'isGuest']);
-Route::get('/getUser', [App\Http\Controllers\Auth\UserController::class, 'index'])->middleware('auth');
+
 Route::post('/forgot-password',[App\Http\Controllers\Auth\ForgotPasswordController::class, 'forgotPassword']);
 Route::post('/reset-password',[App\Http\Controllers\Auth\NewPasswordController::class, 'store']);
-Route::put('/updateUser',[App\Http\Controllers\Auth\ChangeUserDataController::class, 'index'])->middleware('auth');
 
 Route::get('/getHotel',[App\Http\Controllers\Hotels\GetHotelController::class, 'index'])->middleware('auth');
 Route::post('/hotel/create',[App\Http\Controllers\Hotels\StoreHotelController::class, 'index'])->middleware('auth');
