@@ -1,4 +1,5 @@
-Hotel reservation system. The project is developed on Laravel 10, Vue.js 3 and using Bootstrap 5.
+<h4>Hotel reservation system</h4>
+The project is developed on Laravel 10, Vue.js 3 and using Bootstrap 5.
 For translation use - https://github.com/Stichoza/google-translate-php and laravel-vue-i18n. 
 For authentication use - Laravel Sanctum
 
