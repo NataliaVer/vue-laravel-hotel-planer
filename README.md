@@ -1,7 +1,9 @@
 <h4>Hotel reservation system</h4>
-The project is developed on <b>Laravel 10</b>, Vue.js 3 and using Bootstrap 5.
-For translation use - https://github.com/Stichoza/google-translate-php and laravel-vue-i18n. 
-For authentication use - Laravel Sanctum
+The project is developed on <b>Laravel 10</b>, <b>Vue.js 3</b> and using <b>Bootstrap 5</b>.
+<h6>For translation use</h6>
+https://github.com/Stichoza/google-translate-php and laravel-vue-i18n.
+<h6>For authentication use</h6>
+Laravel Sanctum
 
 ![image](https://github.com/NataliaVer/vue-laravel-hotel-planer/assets/33368867/b1da629d-066c-4c7f-9191-001056a3b953)
 
