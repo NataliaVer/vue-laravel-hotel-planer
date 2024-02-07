@@ -1,4 +1,4 @@
-<h4>Hotel reservation system</h4>
+<div class=text-center><h4>Hotel reservation system</h4></div>
 The project is developed on <b>Laravel 10</b>, <b>Vue.js 3</b> and using <b>Bootstrap 5</b>.
 <h6>For translation use</h6>
 https://github.com/Stichoza/google-translate-php and laravel-vue-i18n.
